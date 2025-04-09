@@ -5,7 +5,7 @@ matriz5x5=[]
 def crear_matriz():
     filas= 5
     columnas=5
-    #lo habia hecho asi con la forma que dijo el profe pero pero bueno era mas orientado a los numero 
+    # Lo habia hecho asi con la forma que dijo el profe pero pero bueno era mas orientado a los numeros.
     #agregabamos append 0 en cad iteracion
 
     #for fila in range(filas):
