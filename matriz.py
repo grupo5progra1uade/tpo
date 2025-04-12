@@ -1,53 +1,60 @@
 from datetime import datetime
 
-matriz4x4=[]
+matriznx5=[]
 
 def crear_matriz():
-    filas= 2
-    columnas=4
-    #lo habia hecho asi con la forma que dijo el profe pero pero bueno era mas orientado a los numero 
-    #agregabamos append 0 en cad iteracion
+    filas = int(input("Ingrese el número de alumnos: ")) 
+    columnas = 4
+    matriznx5.clear()  
 
-    #for fila in range(filas):
-        #matriz5x5.append([])  
-     #   for columna in range(columnas):
-      #      matriz5x5[fila].append(0)
-    
-    #.... forma simple
-    for fila in range(filas):
-         matriz4x4.append([None]* columnas) #agrega none a cada fila *columna osea todo none
+    for i in range(filas):
+        matriznx5.append([None] * columnas) 
+     
 
 
 def cargar_datos():
-    filas=len(matriz4x4)
+    filas = len(matriznx5)
 
     for fila in range(filas):
-        nombre= input("Ingrese nombre del alumno:")
-        legajo= int(input("Ingrese nro de legajo:"))
-        fecha= datetime.today().strftime("%Y-%m-%d")
-        presente= int(input("Ingrese 0.Ausente -1.Media asistencia 1.Presente"))
+        legajo = int(input("Ingrese nro de legajo: "))  
+        apellido = input("Ingrese apellido del alumno: ")
+        nombre = input("Ingrese nombre del alumno: ")
+        fecha = datetime.today().strftime("%Y-%m-%d")
+        presente = int(input("Ingrese 0.Ausente -1.Media asistencia 1.Presente: "))
         
-        matriz4x4[fila]= [nombre,legajo,fecha,presente]
+        matriznx5[fila] = [legajo, apellido, nombre, fecha, presente]
 
    
 
 def imprimir_matriz_practica():
-    for fila in matriz4x4:
+    for fila in matriznx5:
             print(fila)
 
-def imprimir_matriz_ordenada():
+def imprimir_matriz():
     print("Registro de asistencia")
-    print("Nombre    |Legajo | Fecha      | Presente")
-    print("-"* 50)
+    print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
+    print("-" * 60)
 
-    for fila in matriz4x4:
-        print(f"{fila[0]:<10} | {fila[1]:<6} | {fila[2]} | {fila[3]:<8}")
+    for fila in matriznx5:
+        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
+
+
 
 # funcion ordenar
-def ordenar(matriz):
-     matriz.sort()
-     return matriz
-      
+def imprimir_matriz_ordenada_por_apellido():
+    print("Registro de asistencia (Ordenado por Apellido)")
+    print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
+    print("-" * 60)
+
+    # ordenar la matriz manualmente por el segundo elemento (apellido)
+    for i in range(len(matriznx5) - 1):
+        for j in range(len(matriznx5) - i - 1):
+            if matriznx5[j][1].lower() > matriznx5[j + 1][1].lower(): # Comparar apellidos en minúsculas
+                matriznx5[j], matriznx5[j + 1] = matriznx5[j + 1], matriznx5[j]
+
+    # imprimir la matriz ordenada
+    for fila in matriznx5:
+        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
 
 #funcion de asistencia
 def asistencia(presente):
@@ -61,5 +68,5 @@ def asistencia(presente):
 crear_matriz()
 cargar_datos()
 imprimir_matriz_practica()
-imprimir_matriz_ordenada()
-print("lista ordenada", ordenar(matriz4x4))
+imprimir_matriz()
+print("lista ordenada", imprimir_matriz_ordenada_por_apellido())
