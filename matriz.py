@@ -36,7 +36,6 @@ def imprimir_matriz():
         print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
 
 
-
 # funcion ordenar
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
