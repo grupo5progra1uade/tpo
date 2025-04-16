@@ -102,7 +102,7 @@ def asistencia(presente):
  
 
 def registrar_asistencia(alumnos, registro):
-    fecha_actual = datetime.now().strftime("%Y - %m - %d")
+    fecha = datetime.today().strftime("%Y-%m-%d")
     asistencias = []
     for alumno in alumnos:
         print(f"Alumno: {alumno[2]} {alumno[1]}")
