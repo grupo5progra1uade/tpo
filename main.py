@@ -4,7 +4,7 @@ from asistencia import registrar_asistencia, mostrar_asistencia_alumno, mostrar_
 from utils import mostrar_menu  #hay ver q hacemos con este archivo y q funciones metemos
 
 def main():
-    
+    materias = [] #como definiamos las materias? poniamos algunas ya de por si? o dejamos vacio?
     alumnos = matriznx5
     asistencias = []
 
@@ -35,7 +35,7 @@ def main():
 
 def gestion_materias(materias):
     while True:
-        limpiar_pantalla()
+        
         mostrar_menu("Materias", [
             "Listar materias",
             "Agregar materia",
@@ -65,7 +65,7 @@ def agregar_materias(materias):
 
 def consultar_asistencias(asistencias):
     while True:
-        limpiar_pantalla()
+       
         mostrar_menu("Asistencias", [
             "Por alumno",
             "Listado general",
