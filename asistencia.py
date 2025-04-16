@@ -108,7 +108,7 @@ def registrar_asistencia(alumnos, registro):
         print(f"Alumno: {alumno[2]} {alumno[1]}")
         estado = input("¿Presente? (s/n): ").lower()
         asistencias.append(1 if estado == 's' else 0)
-    registro.append([fecha_actual, asistencias])
+    registro.append([fecha, asistencias])
     print("Asistencia registrada")
 
 def mostrar_asistencia_alumno(registro):
@@ -118,7 +118,7 @@ def mostrar_asistencia_alumno(registro):
 
 def mostrar_asistencia_general(registro):
     for fecha, asistencias in registro:
-        print(f"\nFecha: {fecha}")
+        print(f"\nFecha: {fecha}") #ese /n salta de linea
         print(f"Presentes: {sum(asistencias)}/{len(asistencias)}")
 
 
@@ -126,7 +126,7 @@ def gestion_alumnos():
     crear_matriz()
     cargar_datos()
     imprimir_matriz_ordenada_por_apellido()
-
+    
 def mostrar_alumnos():
     imprimir_matriz()
 
