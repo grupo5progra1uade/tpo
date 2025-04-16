@@ -9,7 +9,6 @@ def crear_matriz():
 
     for i in range(filas):
         matriznx5.append([None] * columnas) 
-     
 
 
 def cargar_datos():
@@ -23,8 +22,6 @@ def cargar_datos():
         presente = int(input("Ingrese 0.Ausente -1.Media asistencia 1.Presente: "))
         
         matriznx5[fila] = [legajo, apellido, nombre, fecha, presente]
-
-   
 
 def imprimir_matriz_practica():
     for fila in matriznx5:
