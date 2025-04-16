@@ -19,3 +19,17 @@ print("Nombre           | Código")
 print("-"*30)
 for fila in materias:
     print("Materia:", fila[0], "| Código:", fila[1])
+
+def mostrar_materias(lista_materias):
+    print("\nMaterias del curso:")
+    for i, materia in enumerate(lista_materias, 1):
+        print(f"{i}. {materia}")
+
+def agregar_materia(lista_materias):
+    nueva = input("Nombre de la nueva materia: ").capitalize()
+    if nueva not in lista_materias:
+        lista_materias.append(nueva)
+        print("¡Materia agregada con éxito!")
+    else:
+        print("¡La materia ya existe!")
+    return lista_materias
