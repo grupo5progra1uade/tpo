@@ -1,5 +1,6 @@
 from materias import mostrar_materias, agregar_materia
-from asistencia import registrar_asistencia, mostrar_asistencia_alumno, mostrar_asistencia_general, matriznx5, gestion_alumnos, mostrar_alumnos, ordenar_por_apellido
+from asistencia import registrar_asistencia, mostrar_asistencia_alumno, mostrar_asistencia_general
+from alumnos import gestion_alumnos, mostrar_alumnos, ordenar_por_apellido
 from utils import mostrar_menu  #hay ver q hacemos con este archivo y q funciones metemos
 
 def main():
