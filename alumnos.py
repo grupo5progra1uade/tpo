@@ -181,3 +181,17 @@ def asistencia_total_ponderada():
         0
     )
 
+def matriz_a_dict_alumnos(matriz):
+    """
+    Convierte cualquier matriz de alumnos (listas de listas) en un
+    diccionario con legajo como clave.
+    """
+    return {
+        fila[0]: {
+            "apellido": fila[1],
+            "nombre":   fila[2],
+            "fecha":    fila[3],
+            "estado":   fila[4]
+        }
+        for fila in matriz
+    }

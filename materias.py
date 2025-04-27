@@ -32,3 +32,7 @@ def agregar_materia(lista_materias):
     else:
         print("¡La materia ya existe!")
     return lista_materias
+
+# Convertir la lista de materias en una tupla (inmutable)
+materias_tuple = tuple([materia[0] for materia in materias])  # Solo tomamos los nombres de las materias
+
