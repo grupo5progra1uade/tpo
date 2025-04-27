@@ -1,5 +1,7 @@
 from datetime import datetime
 from utils import *
+from functools import reduce
+
 
 matriznx5 = []
 
@@ -65,6 +67,10 @@ def cargar_datos():
                 print("Ingreso mal un nombre, vuelva a ingresarlo.")
 
         fecha = datetime.today().strftime("%Y-%m-%d")
+        # Extraigo año, mes y día con slicing
+        año, mes, día = fecha[:4], fecha[5:7], fecha[8:]
+        print(f"[DEBUG] Año: {año}, Mes: {mes}, Día: {día}")
+
 
         while True:
             presente = input("Ingrese 0.Ausente -1.Media asistencia 1.Presente: ").strip()
@@ -155,3 +161,23 @@ def mostrar_alumnos():
 
 def ordenar_por_apellido():
     imprimir_matriz_ordenada_por_apellido()
+
+# Función que devuelve una lista con los nombres completos de los alumnos
+# Se usa map() para aplicar una función lambda que combina el nombre (a[2]) y el apellido (a[1]) de cada alumno
+
+def nombres_completos():
+    return list(map(lambda a: f"{a[2]} {a[1]}", matriznx5))
+
+def alumnos_presentes():
+    return list(filter(lambda a: a[4] == 1, matriznx5))
+
+# Función que calcula la asistencia total ponderada de todos los alumnos
+# Se usa reduce() para recorrer todos los registros y sumar las asistencias ponderadas:
+#   1 para presente (a[4] == 1), 0.5 para media falta (a[4] == -1) y 0 para ausente (a[4] == 0)
+def asistencia_total_ponderada():
+    return reduce(
+        lambda acc, a: acc + (1 if a[4] == 1 else 0.5 if a[4] == -1 else 0),
+        matriznx5,
+        0
+    )
+
