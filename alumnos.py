@@ -50,7 +50,7 @@ def cargar_datos():
                 if legajo in legajos_existentes:
                     print("¡Legajo ya existente! Ingrese otro.")
                 else:
-                    legajos_existentes.append(legajo)
+                    legajos_existentes.add(legajo)
                     break
             else:
                 print("Debe ingresar un número válido.")
