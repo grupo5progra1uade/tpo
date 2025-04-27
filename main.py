@@ -1,11 +1,11 @@
-from materias import mostrar_materias, agregar_materia
+from materias import mostrar_materias, agregar_materia, materias_tuple
 from asistencia import registrar_asistencia, mostrar_asistencia_alumno, mostrar_asistencia_general
 from alumnos import *
-from utils import mostrar_menu  #hay ver q hacemos con este archivo y q funciones metemos
+from utils import mostrar_menu
 
 def main():
-    materias = [] #como definiamos las materias? poniamos algunas ya de por si? o dejamos vacio?
-    alumnos = matriznx5
+    materias = []
+    matriznx5
     asistencias = []
 
     while True:
@@ -24,7 +24,7 @@ def main():
         elif opcion == "2":
             gestion_materias(materias)
         elif opcion == "3":
-            registrar_asistencia(alumnos, asistencias)
+            registrar_asistencia(matriznx5, asistencias, materias)
         elif opcion == "4":
             consultar_asistencias(asistencias)
         elif opcion == "5":
@@ -52,16 +52,6 @@ def gestion_materias(materias):
             return
         else:
             input("Opción inválida. Presione Enter...")
-
-def agregar_materias(materias):
-    nueva = input("Nombre de la nueva materia: ").capitalize()
-    if nueva not in materias:
-        materias.append(nueva)
-        print(f"Materia {nueva} agregada!")
-    else:
-        print("¡La materia ya existe!")
-    input("Presione Enter para continuar...")
-    return materias
 
 def consultar_asistencias(asistencias):
     while True:
