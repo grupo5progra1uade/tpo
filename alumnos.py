@@ -45,7 +45,7 @@ def cargar_datos():
             
             if es_numero and legajo:
 
-                legajo = int(input("Ingrese nro de legajo: "))
+                legajo = int(legajo)
                 
                 if legajo in legajos_existentes:
                     print("¡Legajo ya existente! Ingrese otro.")
