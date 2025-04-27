@@ -1,4 +1,5 @@
 from datetime import datetime
+from utils import *
 
 matriznx5 = []
 
@@ -12,6 +13,8 @@ def crear_matriz():
 
 def cargar_datos():
     filas = len(matriznx5)
+
+    legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None}
     
     def letras_validas(texto):
         for c in texto:
@@ -27,27 +30,42 @@ def cargar_datos():
     def capitalizar(texto):
         return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
 
+    legajos_existentes = set()  # Conjunto para controlar legajos únicos
+
     for fila in range(filas):
-        legajo = int(input("Ingrese nro de legajo: "))
-        
+        while True:
+            try:
+                legajo = int(input("Ingrese nro de legajo: "))
+                if legajo in legajos_existentes:
+                    print("¡Legajo ya existente! Ingrese otro.")
+                else:
+                    legajos_existentes.add(legajo)
+                    break
+            except ValueError:
+                print("Debe ingresar un número válido.")
+
         while True:
             apellido = input("Ingrese apellido del alumno: ").strip()
-            if letras_validas(apellido):
+            if not apellido:
+                print("El apellido no puede estar vacío. Vuelva a ingresarlo.")
+            elif letras_validas(apellido):
                 apellido = capitalizar(apellido)
                 break
             else:
-                print("Ingreso mal un apellido, vuelva a ingresarlo")
-                
+                print("Ingreso mal un apellido, vuelva a ingresarlo.")
+
         while True:
             nombre = input("Ingrese nombre del alumno: ").strip()
-            if letras_validas(nombre):
+            if not nombre:
+                print("El nombre no puede estar vacío. Vuelva a ingresarlo.")
+            elif letras_validas(nombre):
                 nombre = capitalizar(nombre)
                 break
             else:
-                print("Ingreso mal un nombre, vuelva a ingresarlo")
-                
+                print("Ingreso mal un nombre, vuelva a ingresarlo.")
+
         fecha = datetime.today().strftime("%Y-%m-%d")
-        
+
         while True:
             presente = input("Ingrese 0.Ausente -1.Media asistencia 1.Presente: ").strip()
             if asistencia(presente):
@@ -55,7 +73,9 @@ def cargar_datos():
                 if presente in [-1, 0, 1]:
                     break
                 else:
-                    print("Ingreso incorrectamente el valor de la falta, vuelva a ingresarla")
+                    print("Ingreso incorrectamente el valor de la falta, vuelva a ingresarla.")
+            else:
+                print("Ingrese un número válido (-1, 0 o 1).")
 
         matriznx5[fila] = [legajo, apellido, nombre, fecha, presente]
 
@@ -75,6 +95,24 @@ def imprimir_matriz_ordenada_por_apellido():
     print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
     print("-" * 60)
 
+    alumnos_ordenados = sorted(matriznx5, key=lambda alumno: alumno[1].lower())
+
+    for fila in alumnos_ordenados:
+        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
+
+def buscar_alumno_por_legajo():
+    legajo_buscado = int(input("Ingrese el número de legajo a buscar: "))
+    encontrado = False
+    for fila in matriznx5:
+        if fila[0] == legajo_buscado:
+            print("\nAlumno encontrado:")
+            print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
+            encontrado = True
+            break
+    if not encontrado:
+        print("No se encontró un alumno con ese legajo.")
+
+
 def get_alumnos():
     return matriznx5
 
@@ -88,10 +126,30 @@ def get_alumnos():
         print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
 
 def gestion_alumnos():
-    crear_matriz()
-    cargar_datos()
-    imprimir_matriz_ordenada_por_apellido()
+    while True:
+        mostrar_menu("Gestión de Alumnos", [
+            "Crear y cargar alumnos",
+            "Listar alumnos",
+            "Ordenar alumnos por apellido",
+            "Buscar alumno por legajo",
+            "Volver al menú principal"
+        ])
 
+        opcion = input("Opción: ").strip()
+
+        if opcion == "1":
+            crear_matriz()
+            cargar_datos()
+        elif opcion == "2":
+            mostrar_alumnos()
+        elif opcion == "3":
+            ordenar_por_apellido()
+        elif opcion == "4":
+            buscar_alumno_por_legajo()
+        elif opcion == "5":
+            break
+        else:
+            input("Opción inválida. Presione Enter para continuar...")
 def mostrar_alumnos():
     imprimir_matriz()
 
