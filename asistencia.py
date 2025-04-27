@@ -150,9 +150,7 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
 
         if valido:
             #Convertir a numero
-            num = 0
-            for c in entrada:
-                num = num * 10 + (ord(c) - ord('0'))
+            num = int(entrada) 
 
             if num >= 1 and num <= len(materias_tuple):
                 opcion = num
@@ -214,24 +212,24 @@ def mostrar_asistencia_general(registro, materia=None):
     print("\nResumen general de asistencias:")
     
     for item in registro:
-        if materia and item['materia'] != materia:
-            continue
-            
-        asistencias = item['asistencias']
-        total = len(asistencias)
-        presentes = 0
-        medias = 0
-        for a in asistencias:
-            if a == 1:
-                presentes += 1
-            elif a == -1:
-                medias += 1
-        ausentes = total - presentes - medias
-        porcentaje = (presentes + medias * 0.5) / total * 100 if total > 0 else 0
+        if not materia or item['materia'] == materia:   
+            asistencias = item['asistencias']
+            total = len(asistencias)
+            presentes = 0
+            medias = 0
         
-        print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
-        print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
-        print(f"Asistencia efectiva: {porcentaje:.2f}%")
+            for a in asistencias:
+                if a == 1:
+                    presentes += 1
+                elif a == -1:
+                    medias += 1
+        
+            ausentes = total - presentes - medias
+            porcentaje = (presentes + medias * 0.5) / total * 100 if total > 0 else 0
+        
+            print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
+            print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
+            print(f"Asistencia efectiva: {porcentaje:.2f}%")
 
 def gestion_alumnos():
     crear_matriz()
