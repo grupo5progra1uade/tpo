@@ -178,8 +178,13 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
             else:
                 print("Entrada inválida. Ingrese 1, -1 o 0.")
     
-    registro.append([fecha, asistencias])
+    registro.append({
+    "fecha": fecha,
+    "materia": materia,
+    "asistencias": asistencias
+    })
     print("Asistencia registrada correctamente.")
+
 
 def mostrar_asistencia_alumno(registro, matriznx5): 
     legajo = int(input("Ingrese legajo del alumno: "))
