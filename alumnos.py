@@ -36,14 +36,23 @@ def cargar_datos():
 
     for fila in range(filas):
         while True:
-            try:
+            legajo = input("Ingrese nro de legajo: ").strip()
+            es_numero = True
+            for c in legajo:
+                if c not in "0123456789":
+                    es_numero = False
+                    break
+            
+            if es_numero and legajo:
+
                 legajo = int(input("Ingrese nro de legajo: "))
+                
                 if legajo in legajos_existentes:
                     print("¡Legajo ya existente! Ingrese otro.")
                 else:
-                    legajos_existentes.add(legajo)
+                    legajos_existentes.append(legajo)
                     break
-            except ValueError:
+            else:
                 print("Debe ingresar un número válido.")
 
         while True:
