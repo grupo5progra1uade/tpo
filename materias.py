@@ -3,12 +3,12 @@
 
 materias = []  #solo guarda nombre de las materias
 
-def cargar_materias():
-    global materias
+def cargar_materias(lista_materias):
     cantidad = int(input("¿Cuántas materias querés cargar?: "))
     for _ in range(cantidad):
         nombre = input("Nombre de la materia: ").capitalize()
-        materias.append(nombre)
+        lista_materias.append(nombre)
+    return lista_materias
 
 def mostrar_materias(lista_materias):
     print("\nMaterias del curso:")
