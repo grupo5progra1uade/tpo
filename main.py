@@ -65,7 +65,7 @@ def consultar_asistencias(asistencias):
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            mostrar_asistencia_alumno(asistencias)
+            mostrar_asistencia_alumno(asistencias, matriznx5)
         elif opcion == "2":
             mostrar_asistencia_general(asistencias)
         elif opcion == "3":

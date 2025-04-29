@@ -119,7 +119,7 @@ def imprimir_matriz_ordenada_por_apellido():
 def asistencia(presente):
      total_asistencia=0
      if presente==1:
-          total_asistencia += 1
+          total_asistencia =+1
      if  presente==-1:
           total_asistencia+=0.5
      else: presente==0
