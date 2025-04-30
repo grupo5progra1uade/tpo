@@ -124,6 +124,7 @@ def asistencia(presente):
           total_asistencia+=0.5
      else: presente==0
  
+
 def registrar_asistencia(alumnos, registro, materias_tuple):
     
     fecha = datetime.today().strftime("%Y-%m-%d")
@@ -212,38 +213,27 @@ def mostrar_asistencia_alumno(registro, matriznx5):
                 texto = "Ausente"
             print(f"Materia: {item['materia']} | Fecha: {item['fecha']} - {texto}")
 
-def mostrar_asistencia_general(registro, materia=None):
+def mostrar_asistencia_general(registro):
     print("\nResumen general de asistencias:")
     
-    for item in registro:
-        if not materia or item['materia'] == materia:   
-            asistencias = item['asistencias']
-            total = len(asistencias)
-            presentes = 0
-            medias = 0
-        
-            for a in asistencias:
-                if a == 1:
-                    presentes += 1
-                elif a == -1:
-                    medias += 1
-        
-            ausentes = total - presentes - medias
-            porcentaje = (presentes + medias * 0.5) / total * 100 if total > 0 else 0
-        
-            print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
-            print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
-            print(f"Asistencia efectiva: {porcentaje:.2f}%")
-
-def gestion_alumnos():
-    crear_matriz()
-    cargar_datos()
-    imprimir_matriz_ordenada_por_apellido()
+    for item in registro:  
+        asistencias = item['asistencias']
+        total = len(asistencias)
+        presentes = 0
+        medias = 0
     
-def mostrar_alumnos():
-    imprimir_matriz()
+        for a in asistencias:
+            if a == 1:
+                presentes += 1
+            elif a == -1:
+                medias += 1
+    
+        ausentes = total - presentes - medias
+        porcentaje = (presentes + medias * 0.5) / total * 100 if total > 0 else 0
+    
+        print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
+        print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
+        print(f"Asistencia efectiva: {porcentaje:.2f}%")
 
-def ordenar_por_apellido():
-    imprimir_matriz_ordenada_por_apellido()
 
 
