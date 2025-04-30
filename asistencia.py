@@ -124,7 +124,6 @@ def asistencia(presente):
           total_asistencia+=0.5
      else: presente==0
  
-
 def registrar_asistencia(alumnos, registro, materias_tuple):
     
     fecha = datetime.today().strftime("%Y-%m-%d")
