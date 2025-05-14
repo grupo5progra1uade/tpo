@@ -94,9 +94,6 @@ def cargar_datos():
 
         matriznx5[fila] = [legajo, apellido, nombre, fecha, presente]
 
-def imprimir_matriz_practica():
-    for fila in matriznx5:
-        print(fila)
 
 def imprimir_matriz():
     print("Registro de asistencia")
