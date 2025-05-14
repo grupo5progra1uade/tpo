@@ -2,12 +2,11 @@ from datetime import datetime
 from utils import *
 from functools import reduce
 
-
 matriznx5 = []
 
 def crear_matriz():
     filas = int(input("Ingrese el número de alumnos: ")) 
-    columnas = 4
+    columnas = 5  # Aseguramos 5 columnas
     matriznx5.clear()
 
     for i in range(filas):
@@ -17,36 +16,20 @@ def cargar_datos():
     filas = len(matriznx5)
 
     legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None}
-    
-    def letras_validas(texto):
-        for c in texto:
-            if not (c.isalpha() or c in " -"):
-                return False
-        return True
 
-    def asistencia(valor):
-        if valor.startswith('-'):
-            return valor[1:].isdigit()
-        return valor.isdigit()
+    def letras_validas(texto):
+        return all(c.isalpha() or c in " -" for c in texto)
 
     def capitalizar(texto):
         return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
 
-    legajos_existentes = set()  # Conjunto para controlar legajos únicos
+    legajos_existentes = set()
 
     for fila in range(filas):
         while True:
             legajo = input("Ingrese nro de legajo: ").strip()
-            es_numero = True
-            for c in legajo:
-                if c not in "0123456789":
-                    es_numero = False
-                    break
-            
-            if es_numero and legajo:
-
+            if legajo.isdigit():
                 legajo = int(legajo)
-                
                 if legajo in legajos_existentes:
                     print("¡Legajo ya existente! Ingrese otro.")
                 else:
@@ -76,66 +59,42 @@ def cargar_datos():
                 print("Ingreso mal un nombre, vuelva a ingresarlo.")
 
         fecha = datetime.today().strftime("%Y-%m-%d")
-        # Extraigo año, mes y día con slicing
-        año, mes, día = fecha[:4], fecha[5:7], fecha[8:]
-        print(f"[DEBUG] Año: {año}, Mes: {mes}, Día: {día}")
-
-
-        while True:
-            presente = input("Ingrese 0.Ausente -1.Media asistencia 1.Presente: ").strip()
-            if asistencia(presente):
-                presente = int(presente)
-                if presente in [-1, 0, 1]:
-                    break
-                else:
-                    print("Ingreso incorrectamente el valor de la falta, vuelva a ingresarla.")
-            else:
-                print("Ingrese un número válido (-1, 0 o 1).")
-
-        matriznx5[fila] = [legajo, apellido, nombre, fecha, presente]
-
+        matriznx5[fila] = [legajo, apellido, nombre, fecha, None]
 
 def imprimir_matriz():
     print("Registro de asistencia")
     print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
     print("-" * 60)
     for fila in matriznx5:
-        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
+        valor = fila[4] if fila[4] is not None else 'Sin registro'
+        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {valor:<8}")
 
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
     print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
     print("-" * 60)
-
     alumnos_ordenados = sorted(matriznx5, key=lambda alumno: alumno[1].lower())
-
     for fila in alumnos_ordenados:
-        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
+        valor = fila[4] if fila[4] is not None else 'Sin registro'
+        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {valor:<8}")
 
 def buscar_alumno_por_legajo():
     legajo_buscado = int(input("Ingrese el número de legajo a buscar: "))
-    encontrado = False
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
             print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
-            encontrado = True
-            break
-    if not encontrado:
-        print("No se encontró un alumno con ese legajo.")
-
+            return
+    print("No se encontró un alumno con ese legajo.")
 
 def get_alumnos():
     return matriznx5
 
+def mostrar_alumnos():
+    imprimir_matriz()
 
-    for i in range(len(matriznx5) - 1):
-        for j in range(len(matriznx5) - i - 1):
-            if matriznx5[j][1].lower() > matriznx5[j + 1][1].lower():
-                matriznx5[j], matriznx5[j + 1] = matriznx5[j + 1], matriznx5[j]
-
-    for fila in matriznx5:
-        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {fila[4]:<8}")
+def ordenar_por_apellido():
+    imprimir_matriz_ordenada_por_apellido()
 
 def gestion_alumnos():
     while True:
@@ -162,14 +121,6 @@ def gestion_alumnos():
             break
         else:
             input("Opción inválida. Presione Enter para continuar...")
-def mostrar_alumnos():
-    imprimir_matriz()
-
-def ordenar_por_apellido():
-    imprimir_matriz_ordenada_por_apellido()
-
-# Función que devuelve una lista con los nombres completos de los alumnos
-# Se usa map() para aplicar una función lambda que combina el nombre (a[2]) y el apellido (a[1]) de cada alumno
 
 def nombres_completos():
     return list(map(lambda a: f"{a[2]} {a[1]}", matriznx5))
@@ -177,9 +128,6 @@ def nombres_completos():
 def alumnos_presentes():
     return list(filter(lambda a: a[4] == 1, matriznx5))
 
-# Función que calcula la asistencia total ponderada de todos los alumnos
-# Se usa reduce() para recorrer todos los registros y sumar las asistencias ponderadas:
-#   1 para presente (a[4] == 1), 0.5 para media falta (a[4] == -1) y 0 para ausente (a[4] == 0)
 def asistencia_total_ponderada():
     return reduce(
         lambda acc, a: acc + (1 if a[4] == 1 else 0.5 if a[4] == -1 else 0),
@@ -188,10 +136,6 @@ def asistencia_total_ponderada():
     )
 
 def matriz_a_dict_alumnos(matriz):
-    """
-    Convierte cualquier matriz de alumnos (listas de listas) en un
-    diccionario con legajo como clave.
-    """
     return {
         fila[0]: {
             "apellido": fila[1],
@@ -201,3 +145,37 @@ def matriz_a_dict_alumnos(matriz):
         }
         for fila in matriz
     }
+
+def modificar_alumno():
+    legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
+    for fila in matriznx5:
+        if fila[0] == legajo_buscado:
+            print("\nAlumno encontrado:")
+            print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
+
+            nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
+            if nuevo_apellido.isalpha():
+                fila[1] = nuevo_apellido.capitalize()
+
+            nuevo_nombre = input("Ingrese nuevo nombre (deje vacío para no modificar): ").strip()
+            if nuevo_nombre.isalpha():
+                fila[2] = nuevo_nombre.capitalize()
+
+            nuevo_estado = input("Ingrese nuevo estado de asistencia (-1, 0, 1) o deje vacío para no modificar: ").strip()
+            if nuevo_estado in ["-1", "0", "1"]:
+                fila[4] = int(nuevo_estado)
+
+            print("\n¡Alumno modificado con éxito!")
+            return
+
+    print("No se encontró un alumno con ese legajo.")
+
+def eliminar_alumno():
+    legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
+    for i in range(len(matriznx5)):
+        if matriznx5[i][0] == legajo_buscado:
+            print(f"\nEliminando alumno: {matriznx5[i][1]} {matriznx5[i][2]}")
+            del matriznx5[i]
+            print("Alumno eliminado con éxito.")
+            return
+    print("No se encontró un alumno con ese legajo.")
