@@ -1,16 +1,17 @@
-from materias import mostrar_materias, agregar_materia, borrar_materia
-from asistencia import mostrar_asistencia_alumno, mostrar_asistencia_general
+from materias import *
+from asistencia import *
 from alumnos import *
 from utils import mostrar_menu
 
 def main():
     materias = []
-    matriznx5
+    matriznx5 = []
     asistencias = []
 
     while True:
         mostrar_menu("Sistema de Asistencia", [
             "Gestión de Alumnos",
+            "Registrar Asistencia",
             "Gestión de Materias",
             "Consultar Asistencias",
             "Salir"
@@ -19,18 +20,20 @@ def main():
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            gestion_alumnos()
+            gestion_alumnos(matriznx5)
         elif opcion == "2":
-            gestion_materias(materias)
+            registrar_asistencia(matriznx5, asistencias, materias)
         elif opcion == "3":
-            consultar_asistencias(asistencias)
+            gestion_materias(materias)
         elif opcion == "4":
+            consultar_asistencias(asistencias, matriznx5)
+        elif opcion == "5":
             print("¡Hasta luego!")
             break
         else:
             input("Opción inválida. Presione Enter...")
 
-def gestion_alumnos():
+def gestion_alumnos(matriznx5):
     while True:
         mostrar_menu("Gestión de Alumnos", [
             "Crear y cargar alumnos",
@@ -61,6 +64,22 @@ def gestion_alumnos():
             return
         else:
             input("Opción inválida. Presione Enter para continuar...")
+            
+def registrar_asistencia_menu(matriznx5, asistencias, materias):
+    while True:
+        mostrar_menu("Registro de Asistencia", [
+            "Cargar asistencia",
+            "Volver"
+        ])
+    
+        opcion = input("Opcion: ").strip()
+        
+        if opcion == "1":
+            registrar_asistencia(matriznx5, asistencias, materias)
+        elif opcion == "2":
+            return
+        else:
+            input("Opción inválida. Presione Enter para continuar...")
 
 def gestion_materias(materias):
     while True:
@@ -84,7 +103,7 @@ def gestion_materias(materias):
         else:
             input("Opción inválida. Presione Enter...")
 
-def consultar_asistencias(asistencias):
+def consultar_asistencias(asistencias, matriznx5):
     while True:
         mostrar_menu("Asistencias", [
             "Por alumno",

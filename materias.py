@@ -35,12 +35,12 @@ def borrar_materia(lista_materias):
         print("La materia no existe en la lista.")
     return lista_materias
 
-def registrar_asistencia_en_materia(materia, alumnos):
-    if materia not in asistencias_por_materia:
+def registrar_asistencia_en_materia(materias, alumnos):
+    if materias not in asistencias_por_materia:
         print("Esa materia no existe.")
         return
 
-    print(f"\nRegistrando asistencia para: {materia}")
+    print(f"\nRegistrando asistencia para: {materias}")
     print("1 = presente, 0 = ausente, -1 = media falta\n")
 
     registros = []
@@ -55,7 +55,7 @@ def registrar_asistencia_en_materia(materia, alumnos):
             else:
                 print("Valor inválido. Usá 1, 0 o -1.")
     
-    asistencias_por_materia[materia] = registros
+    asistencias_por_materia[materias] = registros
     print("Asistencia registrada con éxito.")
 
 def menu_materias(lista_materias, alumnos):
