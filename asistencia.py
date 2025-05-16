@@ -1,7 +1,6 @@
 from datetime import datetime
 from alumnos import *
 registro = []
-#matriznx5=[]
 
 def registrar_asistencia(alumnos, registro, materias_tuple):
     

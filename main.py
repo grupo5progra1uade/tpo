@@ -1,11 +1,10 @@
 from materias import *
 from asistencia import *
-from alumnos import *
+from alumnos import * 
 from utils import mostrar_menu
 
 def main():
     materias = []
-    matriznx5 = []
     asistencias = []
 
     while True:
