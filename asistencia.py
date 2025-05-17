@@ -63,8 +63,14 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
     print("Asistencia registrada correctamente.")
 
 
-def mostrar_asistencia_alumno(registro, matriznx5): 
-    legajo = int(input("Ingrese legajo del alumno: "))
+def mostrar_asistencia_alumno(registro, matriznx5):
+    while True:
+        try:
+            legajo = int(input("Ingrese legajo del alumno: "))
+            break
+        except ValueError:
+            print("Ingrese un numero entero")
+            
     indice_alumno = None
     
     #busca indice del alumno

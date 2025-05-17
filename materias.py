@@ -16,14 +16,23 @@ def mostrar_materias(lista_materias):
         print(f"{i+1}. {materia}")
 
 def agregar_materia(lista_materias):
-    nueva = input("Nombre de la nueva materia: ").capitalize()
-    if nueva not in lista_materias:
-        lista_materias.append(nueva)
-        asistencias_por_materia[nueva] = []
-        print("Materia agregada!")
-    else:
-        print("Ya existe!")
-    return lista_materias
+    while True:
+        try:
+            nueva = input("Nombre de la nueva materia: ").capitalize()
+    
+            for palabra in nueva.split(): #separa el string para escribir materias de dos palabras
+                if not palabra.isalpha():
+                    raise ValueError("La materia debe contener solo letras y espacios")
+    
+            if nueva not in lista_materias:
+                lista_materias.append(nueva)
+                asistencias_por_materia[nueva] = []
+                print("Materia agregada!")
+            else:
+                print("Ya existe!")
+            return lista_materias
+        except ValueError as error:
+            print(f"Error: {error}. Vuelva a ingresar la materia")
 
 def borrar_materia(lista_materias):
     materia_a_borrar = input("Nombre de la materia a borrar: ").capitalize()

@@ -5,7 +5,13 @@ from functools import reduce
 matriznx5 = []
 
 def crear_matriz():
-    filas = int(input("Ingrese el número de alumnos: ")) 
+    while True:
+        try:
+            filas = int(input("Ingrese el número de alumnos: "))
+            break
+        except ValueError:
+            print("Ingrese un valor entero")
+            
     columnas = 5  # Aseguramos 5 columnas
     matriznx5.clear()
 
@@ -79,13 +85,19 @@ def imprimir_matriz_ordenada_por_apellido():
         print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {valor:<8}")
 
 def buscar_alumno_por_legajo():
-    legajo_buscado = int(input("Ingrese el número de legajo a buscar: "))
+    while True:
+        try:
+            legajo_buscado = int(input("Ingrese el numero de legajo a buscar: "))
+            break #sino hay error sale del bucle
+        except ValueError:
+            print("Ingrese un numero entero")
+            
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
             print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
             return
-    print("No se encontró un alumno con ese legajo.")
+        print("No se encontró un alumno con ese legajo.")
 
 def get_alumnos():
     return matriznx5
@@ -147,7 +159,13 @@ def matriz_a_dict_alumnos(matriz):
     }
 
 def modificar_alumno():
-    legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
+    while True:
+        try:
+            legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
+            break
+        except ValueError:
+            print("Ingrese un numero entero")
+            
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
@@ -171,7 +189,13 @@ def modificar_alumno():
     print("No se encontró un alumno con ese legajo.")
 
 def eliminar_alumno():
-    legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
+    while True:
+        try:
+            legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
+            break
+        except ValueError:
+            print("Ingrese un numero entero")
+            
     for i in range(len(matriznx5)):
         if matriznx5[i][0] == legajo_buscado:
             print(f"\nEliminando alumno: {matriznx5[i][1]} {matriznx5[i][2]}")
