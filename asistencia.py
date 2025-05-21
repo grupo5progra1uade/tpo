@@ -1,11 +1,38 @@
 from datetime import datetime
 from alumnos import *
 registro = []
+asistencias = []
+
+# Precarga de asistencias relacionadas con los alumnos de alumnos.py
+registro.extend([
+    {
+        "fecha": "2024-08-20",
+        "materia": "Matemática",
+        "asistencias": [
+            1,   # Ana López (presente)
+            0,   # Bruno Martínez (ausente)
+            -1,  # Clara Ramírez (media falta)
+            1,   # Diego Suárez (presente)
+            0    # Elena Fernández (ausente)
+        ]
+    },
+    {
+        "fecha": "2024-08-21",
+        "materia": "Programación",
+        "asistencias": [
+            -1,  # Ana López (media falta)
+            1,   # Bruno Martínez (presente)
+            1,   # Clara Ramírez (presente)
+            0,   # Diego Suárez (ausente)
+            1    # Elena Fernández (presente)
+        ]
+    }
+])
+
 
 def registrar_asistencia(alumnos, registro, materias_tuple):
     
     fecha = datetime.today().strftime("%Y-%m-%d")
-    asistencias = []
     
     print("\nSeleccionar materia:")
     for i in range(len(materias_tuple)):

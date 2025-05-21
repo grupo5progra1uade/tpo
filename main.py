@@ -4,8 +4,6 @@ from alumnos import *
 from utils import mostrar_menu
 
 def main():
-    materias = []
-    asistencias = []
 
     while True:
         mostrar_menu("Sistema de Asistencia", [
@@ -47,7 +45,7 @@ def gestion_alumnos(matriznx5):
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            crear_matriz()
+            #crear_matriz()
             cargar_datos()
         elif opcion == "2":
             mostrar_alumnos()

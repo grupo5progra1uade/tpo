@@ -1,5 +1,31 @@
-materias = []  # solo guarda nombres de materias
-asistencias_por_materia = {}  # materia -> lista de [legajo, estado]
+from alumnos import get_alumnos
+
+# Precarga de materias
+materias = ["Matemática", "Historia", "Programación"]
+
+# Precarga de asistencias relacionadas con los alumnos de alumnos.py
+asistencias_por_materia = {
+    "Matemática": [
+        [1001, 1], [1002, 0], [1003, -1], [1004, 1], [1005, 0]
+    ],
+    "Historia": [
+        [1001, 1], [1002, 1], [1003, 1], [1004, 0], [1005, -1]
+    ],
+    "Programación": [
+        [1001, -1], [1002, 0], [1003, 1], [1004, 1], [1005, 1]
+    ]
+}
+
+
+# Traemos alumnos precargados
+alumnos_precargados = get_alumnos()
+
+# Precargamos asistencia para cada materia usando el estado del alumno
+for materia in materias:
+    asistencias_por_materia[materia] = [
+        [alumno[0], alumno[4]] for alumno in alumnos_precargados
+    ]
+
 
 def cargar_materias(lista_materias):
     cantidad = int(input("¿Cuántas materias querés cargar?: "))
@@ -14,6 +40,30 @@ def mostrar_materias(lista_materias):
     print("\nMaterias del curso:")
     for i, materia in enumerate(lista_materias):
         print(f"{i+1}. {materia}")
+
+
+def mostrar_asistencias_por_materia():
+    if not asistencias_por_materia:
+        print("\nNo hay asistencias registradas.")
+        return
+
+    alumnos_dict = {alumno[0]: f"{alumno[2]} {alumno[1]}" for alumno in get_alumnos()}
+
+    for materia, asistencias in asistencias_por_materia.items():
+        print(f"\n Asistencias registradas para: {materia}")
+        print("Legajo | Nombre              | Estado")
+        print("-" * 40)
+        for legajo, estado in asistencias:
+            nombre = alumnos_dict.get(legajo, "Desconocido")
+            estado_str = (
+                "Presente" if estado == 1 else
+                "Ausente" if estado == 0 else
+                "Media falta" if estado == -1 else
+                "Sin registro"
+            )
+            print(f"{legajo:<6} | {nombre:<20} | {estado_str}")
+
+
 
 def agregar_materia(lista_materias):
     while True:
@@ -75,7 +125,9 @@ def menu_materias(lista_materias, alumnos):
         print("3. Agregar materia")
         print("4. Borrar materia")
         print("5. Tomar asistencia en una materia")
-        print("6. Volver")
+        print("6. Ver asistencias por materia")
+        print("7. Volver")
+
         opcion = input("Elegí una opción: ")
 
         if opcion == "1":
@@ -91,6 +143,9 @@ def menu_materias(lista_materias, alumnos):
             materia = input("Ingresá el nombre exacto de la materia: ").capitalize()
             registrar_asistencia_en_materia(materia, alumnos)
         elif opcion == "6":
+            mostrar_asistencias_por_materia()
+        elif opcion == "7":
             break
+
         else:
             print("Opción inválida.")

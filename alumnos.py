@@ -4,7 +4,18 @@ from functools import reduce
 
 matriznx5 = []
 
-def crear_matriz():
+# Precarga de alumnos
+matriznx5.extend([
+    [1001, "López",    "Ana",    "2024-08-15", 1],   # presente
+    [1002, "Martínez", "Bruno",  "2024-08-16", 0],   # ausente
+    [1003, "Ramírez",  "Clara",  "2024-08-17", -1],  # media falta
+    [1004, "Suárez",   "Diego",  "2024-08-18", 1],
+    [1005, "Fernández","Elena",  "2024-08-19", 0],
+])
+
+
+
+"""def crear_matriz():
     while True:
         try:
             filas = int(input("Ingrese el número de alumnos: "))
@@ -13,13 +24,17 @@ def crear_matriz():
             print("Ingrese un valor entero")
             
     columnas = 5  # Aseguramos 5 columnas
-    matriznx5.clear()
 
     for i in range(filas):
-        matriznx5.append([None] * columnas)
+        matriznx5.append([None] * columnas)"""
 
 def cargar_datos():
-    filas = len(matriznx5)
+    
+    try:
+        cantidad = int(input("¿Cuántos alumnos desea cargar?: "))
+    except ValueError:
+        print("Entrada inválida. Debe ser un número entero.")
+        return
 
     legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None}
 
@@ -28,10 +43,10 @@ def cargar_datos():
 
     def capitalizar(texto):
         return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
-
+    
     legajos_existentes = set()
 
-    for fila in range(filas):
+    for fila in range(cantidad):
         while True:
             legajo = input("Ingrese nro de legajo: ").strip()
             if legajo.isdigit():
@@ -65,7 +80,7 @@ def cargar_datos():
                 print("Ingreso mal un nombre, vuelva a ingresarlo.")
 
         fecha = datetime.today().strftime("%Y-%m-%d")
-        matriznx5[fila] = [legajo, apellido, nombre, fecha, None]
+        matriznx5.append([legajo, apellido, nombre, fecha, None])
 
 def imprimir_matriz():
     print("Registro de asistencia")
@@ -121,7 +136,7 @@ def gestion_alumnos():
         opcion = input("Opción: ").strip()
 
         if opcion == "1":
-            crear_matriz()
+            #crear_matriz()
             cargar_datos()
         elif opcion == "2":
             mostrar_alumnos()
