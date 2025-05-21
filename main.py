@@ -113,7 +113,7 @@ def consultar_asistencias(asistencias, matriznx5):
         if opcion == "1":
             mostrar_asistencia_alumno(asistencias, matriznx5)
         elif opcion == "2":
-            mostrar_asistencia_general(asistencias)
+            mostrar_asistencia_general(registro)
         elif opcion == "3":
             return
         else:
