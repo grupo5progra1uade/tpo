@@ -13,21 +13,6 @@ matriznx5.extend([
     [1005, "Fernández","Elena",  "2024-08-19", 0],
 ])
 
-
-
-"""def crear_matriz():
-    while True:
-        try:
-            filas = int(input("Ingrese el número de alumnos: "))
-            break
-        except ValueError:
-            print("Ingrese un valor entero")
-            
-    columnas = 5  # Aseguramos 5 columnas
-
-    for i in range(filas):
-        matriznx5.append([None] * columnas)"""
-
 def cargar_datos():
     
     try:
@@ -109,7 +94,7 @@ def buscar_alumno_por_legajo():
             
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
-            print("\nAlumno encontrado:")
+            resultado=print("\nAlumno encontrado:")
             print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
             return
         print("No se encontró un alumno con ese legajo.")
@@ -136,7 +121,6 @@ def gestion_alumnos():
         opcion = input("Opción: ").strip()
 
         if opcion == "1":
-            #crear_matriz()
             cargar_datos()
         elif opcion == "2":
             mostrar_alumnos()

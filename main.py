@@ -45,7 +45,6 @@ def gestion_alumnos(matriznx5):
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            #crear_matriz()
             cargar_datos()
         elif opcion == "2":
             mostrar_alumnos()
