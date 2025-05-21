@@ -28,8 +28,6 @@ def cargar_datos():
 
     def capitalizar(texto):
         return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
-    
-    legajos_existentes = set()
 
     for fila in range(cantidad):
         while True:
