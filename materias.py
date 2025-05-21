@@ -1,17 +1,17 @@
 from alumnos import get_alumnos
 
 # Precarga de materias
-materias = ["Matemática", "Historia", "Programación"]
+materias = ["Matematica", "Historia", "Programacion"]
 
 # Precarga de asistencias relacionadas con los alumnos de alumnos.py
 asistencias_por_materia = {
-    "Matemática": [
+    "Matematica": [
         [1001, 1], [1002, 0], [1003, -1], [1004, 1], [1005, 0]
     ],
     "Historia": [
         [1001, 1], [1002, 1], [1003, 1], [1004, 0], [1005, -1]
     ],
-    "Programación": [
+    "Programacion": [
         [1001, -1], [1002, 0], [1003, 1], [1004, 1], [1005, 1]
     ]
 }
@@ -25,16 +25,6 @@ for materia in materias:
     asistencias_por_materia[materia] = [
         [alumno[0], alumno[4]] for alumno in alumnos_precargados
     ]
-
-
-def cargar_materias(lista_materias):
-    cantidad = int(input("¿Cuántas materias querés cargar?: "))
-    for _ in range(cantidad):
-        nombre = input("Nombre de la materia: ").capitalize()
-        if nombre not in lista_materias:
-            lista_materias.append(nombre)
-            asistencias_por_materia[nombre] = []  # inicializa lista vacía
-    return lista_materias
 
 def mostrar_materias(lista_materias):
     print("\nMaterias del curso:")
@@ -116,36 +106,3 @@ def registrar_asistencia_en_materia(materias, alumnos):
     
     asistencias_por_materia[materias] = registros
     print("Asistencia registrada con éxito.")
-
-def menu_materias(lista_materias, alumnos):
-    while True:
-        print("\n--- Gestión de Materias ---")
-        print("1. Mostrar materias")
-        print("2. Cargar materias")
-        print("3. Agregar materia")
-        print("4. Borrar materia")
-        print("5. Tomar asistencia en una materia")
-        print("6. Ver asistencias por materia")
-        print("7. Volver")
-
-        opcion = input("Elegí una opción: ")
-
-        if opcion == "1":
-            mostrar_materias(lista_materias)
-        elif opcion == "2":
-            cargar_materias(lista_materias)
-        elif opcion == "3":
-            agregar_materia(lista_materias)
-        elif opcion == "4":
-            borrar_materia(lista_materias)
-        elif opcion == "5":
-            mostrar_materias(lista_materias)
-            materia = input("Ingresá el nombre exacto de la materia: ").capitalize()
-            registrar_asistencia_en_materia(materia, alumnos)
-        elif opcion == "6":
-            mostrar_asistencias_por_materia()
-        elif opcion == "7":
-            break
-
-        else:
-            print("Opción inválida.")
