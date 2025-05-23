@@ -1,6 +1,7 @@
 from datetime import datetime
 from utils import *
 from functools import reduce
+import re
 
 matriznx5 = []
 
@@ -24,23 +25,25 @@ def cargar_datos():
     legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None}
 
     def letras_validas(texto):
-        return all(c.isalpha() or c in " -" for c in texto)
+        patron_nombre = r"^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$" #uso de expresiones regulares 
+        return bool(re.match(patron_nombre, texto))
+
 
     def capitalizar(texto):
         return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
 
+    legajo_inicial = 1006 #empezamos en ese valor porque ya hay 5 alumnos precargados
+
     for fila in range(cantidad):
-        while True:
-            legajo = input("Ingrese nro de legajo: ").strip()
-            if legajo.isdigit():
-                legajo = int(legajo)
-                if legajo in legajos_existentes:
-                    print("¡Legajo ya existente! Ingrese otro.")
-                else:
-                    legajos_existentes.add(legajo)
-                    break
-            else:
-                print("Debe ingresar un número válido.")
+        #saco el while porque no hay adentro una condicion q pueda romper el bucle
+        legajo = legajo_inicial + fila
+        if legajo not in legajos_existentes:
+            legajos_existentes.add(legajo)
+                
+        else:
+            legajo += 1  # se evita repetir legajo si ya existe
+            
+
 
         while True:
             apellido = input("Ingrese apellido del alumno: ").strip()
@@ -89,13 +92,17 @@ def buscar_alumno_por_legajo():
             break #sino hay error sale del bucle
         except ValueError:
             print("Ingrese un numero entero")
-            
+    
+    encontrado = False   
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             resultado=print("\nAlumno encontrado:")
+            encontrado = True #se encuentra el legajo
             print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
             return
+    if not encontrado:
         print("No se encontró un alumno con ese legajo.")
+            
 
 def get_alumnos():
     return matriznx5
