@@ -173,7 +173,11 @@ def modificar_alumno():
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
-            print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
+            print("Legajo: ", fila[0])
+            print("Apellido: ",fila[1])
+            print("Nombre: ", fila[2])
+            print("Fecha: ", fila[3])
+            print("Estado de presencia: ", fila[4])
 
             nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
             if nuevo_apellido.isalpha():
@@ -186,12 +190,10 @@ def modificar_alumno():
             nuevo_estado = input("Ingrese nuevo estado de asistencia (-1, 0, 1) o deje vacío para no modificar: ").strip()
             if nuevo_estado in ["-1", "0", "1"]:
                 fila[4] = int(nuevo_estado)
-
             print("\n¡Alumno modificado con éxito!")
             return
 
-    print("No se encontró un alumno con ese legajo.")
-
+    print("No se encontró un alumno con ese legajo.")
 def eliminar_alumno():
     while True:
         try:
