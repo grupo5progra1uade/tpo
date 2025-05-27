@@ -1,4 +1,3 @@
-
 import os
 from alumnos import (
     capitalizar,
@@ -12,6 +11,7 @@ from alumnos import (
     alumnos_presentes,
     asistencia_total_ponderada,
     get_alumnos)
+
 
 def test_capitalizar():
     assert capitalizar("hola") == "Hola"

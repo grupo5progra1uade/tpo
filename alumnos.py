@@ -209,3 +209,8 @@ def eliminar_alumno():
             print("Alumno eliminado con éxito.")
             return
     print("No se encontró un alumno con ese legajo.")
+
+
+# Para archivo test:
+def capitalizar(texto):
+        return " ".join([palabra.capitalize() for palabra in texto.split(" ")])
