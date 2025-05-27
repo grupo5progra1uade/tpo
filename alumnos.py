@@ -70,20 +70,20 @@ def cargar_datos():
 
 def imprimir_matriz():
     print("Registro de asistencia")
-    print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
-    print("-" * 60)
+    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     | Presente")
+    print("-" * 75)
     for fila in matriznx5:
         valor = fila[4] if fila[4] is not None else 'Sin registro'
-        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {valor:<8}")
+        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13} | {valor:<10}")
 
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
-    print("Legajo | Apellido   | Nombre    | Fecha      | Presente")
-    print("-" * 60)
+    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     | Presente")
+    print("-" * 75)
     alumnos_ordenados = sorted(matriznx5, key=lambda alumno: alumno[1].lower())
     for fila in alumnos_ordenados:
         valor = fila[4] if fila[4] is not None else 'Sin registro'
-        print(f"{fila[0]:<6} | {fila[1]:<10} | {fila[2]:<10} | {fila[3]} | {valor:<8}")
+        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13} | {valor:<10}")
 
 def buscar_alumno_por_legajo():
     while True:
