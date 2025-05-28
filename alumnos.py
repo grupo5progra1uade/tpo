@@ -74,12 +74,8 @@ def imprimir_matriz():
     print("-" * 75)
     for fila in matriznx5:
         valor = fila[4] if fila[4] is not None else 'Sin registro'
-<<<<<<< HEAD
-        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13} | {valor:<10}")
-=======
         print(f"{str(fila[0]):<6} | {str(fila[1]):<18} | {str(fila[2]):<18} | {str(fila[3])} | {str(valor):<10}")
 
->>>>>>> 0d31e76 (Arreglo funcion para poder poner doble apellido o doble nombre)
 
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
