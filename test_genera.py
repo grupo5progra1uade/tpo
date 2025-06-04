@@ -1,13 +1,5 @@
-import os
 from alumnos import (
     capitalizar,
-    cargar_datos,
-    mostrar_alumnos,
-    ordenar_por_apellido,
-    buscar_alumno_por_legajo,
-    modificar_alumno,
-    eliminar_alumno,
-    nombres_completos,
     alumnos_presentes,
     asistencia_total_ponderada,
     get_alumnos)
