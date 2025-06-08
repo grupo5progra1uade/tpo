@@ -119,7 +119,7 @@ def agregar_profesor(dic_profes):
             print("Email inválido. Intente nuevamente.")
             
     while True:
-        contra = input("Ingrese su nueva contraseña")
+        contra = input("Ingrese su nueva contraseña: ")
         if not contra:
             print("No puede ingresar sino tiene contraseña")
         elif validar_psw(contra):

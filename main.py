@@ -19,7 +19,8 @@ def pre_menu():
         opcion = input("Seleccione una opción: ").strip()
         
         if opcion == "1":
-            ingreso()
+            if ingreso():
+                return True
 
         elif opcion == "2":
             palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
