@@ -1,7 +1,7 @@
 from datetime import datetime
 from utils import *
 from functools import reduce
-import re
+from validaciones import *
 
 matriznx5 = []
 
@@ -22,15 +22,7 @@ def cargar_datos():
         print("Entrada inválida. Debe ser un número entero.")
         return
 
-    legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None}
-
-    def letras_validas(texto):
-        patron_nombre = r"^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?: [A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" #permite espacios entre nombre y apellido
-        return bool(re.match(patron_nombre, texto))
-
-
-    def capitalizar(texto):
-        return " ".join([palabra.capitalize() for palabra in texto.split(" ")]).strip() #el strip es para evitar aalgun espacio accidental 
+    legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None} 
 
     legajo_inicial = 1006 #empezamos en ese valor porque ya hay 5 alumnos precargados
 
@@ -97,7 +89,7 @@ def buscar_alumno_por_legajo():
     encontrado = False   
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
-            resultado=print("\nAlumno encontrado:")
+            resultado = print("\nAlumno encontrado:")
             encontrado = True #se encuentra el legajo
             print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
             return
@@ -195,6 +187,7 @@ def modificar_alumno():
             return
 
     print("No se encontró un alumno con ese legajo.")
+
 def eliminar_alumno():
     while True:
         try:
@@ -210,8 +203,3 @@ def eliminar_alumno():
             print("Alumno eliminado con éxito.")
             return
     print("No se encontró un alumno con ese legajo.")
-
-
-# Para archivo test:
-def capitalizar(texto):
-        return " ".join([palabra.capitalize() for palabra in texto.split(" ")])

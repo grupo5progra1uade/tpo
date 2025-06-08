@@ -1,9 +1,10 @@
 import pwinput
-
+import re
+#import validaciones import *
 
 profesores = {
-    1: {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123" ,"seguridad": "pepita","materia": "Matematica"},
-    2: {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Historia"},
+    1: {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123" ,"seguridad": "Pepita","materia": "Matematica"},
+    2: {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123","seguridad": "pepitas", "materia": "Historia"},
     3: {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Literatura"}
 }
 
@@ -78,4 +79,83 @@ def cambiar_contraseña():
 
     print("Demasiados intentos fallidos con el email.")
     return False
+
+"""def agregar_profesor(dic, name, apell, mail, clave, asigna):
+    while True:
+        try:
+            clave = input("Ingrese la palabra de seguridad que utilizara: ").strip()
+    
+            if not clave.isalpha():
+                raise ValueError("La palabra de seguridad debe contener solo letras")
+            else:
+                break
+
+        except ValueError as error:
+            print(f"Error: {error}. Vuelva a ingresar la palabra de seguridad")
+    
+    while True:
+        apell = input("Ingrese apellido del profesor: ").strip()
+        if apell == None:
+            print("El apellido no puede estar vacío, ingrese uno.")
+            apell = input("Ingrese apellido del profesor: ").strip()
+        elif letras_validas(apell):
+            apell = capitalizar(apell)
+            break
+        else:
+            print("Ingreso mal un apellido, vuelva a ingresarlo.")
+
+    while True:
+            asigna = input("Ingrese el nombre de la materia: ").strip()
+            if asigna is None:
+                print("La casilla de materia no puede quedar vacia.")
+                asigna = input("Vuelva a ingresarla: ").strip()
+            elif letras_validas(asigna):
+                asigna = capitalizar(asigna)
+                break
+            else:
+                print("Ingreso mal la materia, vuelva a intentarlo")
+
+
+def modificar_profesor():
+    while True:
+        try:
+            seguridad = input("Ingrese palabra clave para modificar el profesor: ").strip()
+            break
+        except ValueError:
+            print("Ingrese la palabra clave")
+            
+    for fila in profesores:
+        if fila[4] == seguridad:
+            print("\nProfesor encontrado:")
+            print("nombre: ", fila[0])
+            print("apellido: ",fila[1])
+            print("email: ", fila[2])
+            print("contraseña: ", fila[3])
+            print("materia: ", fila[5])
+
+            nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
+            if nuevo_apellido.isalpha():
+                fila[1] = nuevo_apellido.capitalize()
+
+            nuevo_nombre = input("Ingrese nuevo nombre (deje vacío para no modificar): ").strip()
+            if nuevo_nombre.isalpha():
+                fila[0] = nuevo_nombre.capitalize()
+                
+            nuevo_email = input("Ingrese el nuevo email: ")
+            if nuevo_email.isalpha():
+                fila[2] = nuevo_email.lower()
+                
+            nueva_psw = input("Ingrese su nueva contraseña: ")
+            fila[3] = validar_psw(nueva_psw)
+
+            nueva_materia = input("Ingrese nueva materia para el nuevo profesor: ").strip()
+            if nueva_materia is not fila[5]:
+                fila[5] = nueva_materia.capitalize()
+            else:
+                print("La materia esta repetida")
+                
+            print("\n¡Profesor modificado con éxito!")
+            return
+
+    print("No se encontró un profesor con esa palabra clave")"""
 

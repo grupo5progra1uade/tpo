@@ -1,9 +1,8 @@
+from validaciones import capitalizar
 from alumnos import (
-    capitalizar,
     alumnos_presentes,
     asistencia_total_ponderada,
     get_alumnos)
-
 
 def test_capitalizar():
     assert capitalizar("hola") == "Hola"
