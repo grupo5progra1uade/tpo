@@ -1,7 +1,7 @@
 from datetime import datetime
 from utils import *
 from functools import reduce
-from validaciones import *
+from validaciones import letras_validas, capitalizar
 
 matriznx5 = []
 

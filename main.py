@@ -9,33 +9,42 @@ from profesores import *
 def pre_menu():
     while True:
         print("\nMenú de Profesores")
-        print("1. Mostrar Profesores")
-        print("2. Ingresar")
-        print("3. Cambiar contraseña")
-        print("4. Salir")
+        print("1. Ingresar")
+        print("2. Modificar profesor")
+        print("3. Cargar nuevo profesor")
+        print("4. Mostrar listado de profesores")
+        print("5. Cambiar contraseña")
+        print("6. Salir")
         
         opcion = input("Seleccione una opción: ").strip()
         
         if opcion == "1":
-            mostrar_profesores()
+            ingreso()
 
         elif opcion == "2":
-            if ingreso():  
+            palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
+            if modificar_profesor(profesores, palabra_clave, indice_seguridad):  
+                return True
+            
+        elif opcion == "3":
+            if agregar_profesor(profesores):  
+                return True  
+        
+        elif opcion == "4":
+            if mostrar_profesores():  
                 return True  
 
-        elif opcion == "3":
+        elif opcion == "5":
             cambiar_contraseña()
 
-        elif opcion == "4":
+        elif opcion == "6":
             print("Saliendo...")
             return False  
         else:
             print("Opción inválida. Intente nuevamente.")
 
 
-
 def main():
-    
     while True:
 
         mostrar_menu("Sistema de Asistencia", [
