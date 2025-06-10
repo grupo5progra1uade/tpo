@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 from utils import *
 from functools import reduce
@@ -203,3 +204,113 @@ def eliminar_alumno():
             print("Alumno eliminado con éxito.")
             return
     print("No se encontró un alumno con ese legajo.")
+
+def exportar_alumnos_a_txt(nombre_archivo="alumnos_lista.txt"):
+    try:
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            archivo.write("Legajo,Apellido,Nombre,Fecha,Presente\n")
+            for fila in matriznx5:
+                presente = fila[4] if fila[4] is not None else "Sin registro"
+                archivo.write(f"{fila[0]},{fila[1]},{fila[2]},{fila[3]},{presente}\n")
+        print(f"Archivo de texto generado correctamente.")
+    except Exception as error:
+        print(f"Error al generar el archivo: {error}")
+
+#serializacion a JSON
+def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
+    try:
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            json.dump(matriz_a_dict_alumnos(matriznx5), archivo)
+        print(f"Archivo .json generado correctamente.")
+    except Exception as error:
+        print(f"Error al generar el archivo: {error}")
+      
+# falta de JSON a python
+
+def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
+    while True:
+        mostrar_menu("CRUD Alumnos (JSON)", [
+            "Listar alumnos",
+            "Agregar alumno",
+            "Modificar alumno",
+            "Eliminar alumno",
+            "Volver"
+        ])
+        opcion = input("Opción: ").strip()
+
+        # Leer archivo JSON
+        try:
+            with open(nombre_archivo, "r", encoding="utf-8") as archivo:
+                alumnos = json.load(archivo)
+        except (FileNotFoundError):
+            alumnos = {}
+
+        if opcion == "1":
+            print("Legajo | Apellido | Nombre | Fecha | Estado")
+            print("-" * 50)
+            for legajo in alumnos:
+                datos = alumnos[legajo]
+                print(f"{legajo} | {datos['apellido']} | {datos['nombre']} | {datos['fecha']} | {datos['estado']}")
+            input("Presione Enter para continuar...")
+
+        elif opcion == "2":
+            try:
+                legajo = int(input("Ingrese legajo: "))
+                if str(legajo) in alumnos:
+                    print("Ya existe un alumno con ese legajo.")
+                    continue
+            except ValueError:
+                print("Legajo inválido.")
+                continue
+            apellido = input("Apellido: ").strip().capitalize()
+            nombre = input("Nombre: ").strip().capitalize()
+            fecha = datetime.today().strftime("%Y-%m-%d")
+            try:
+                estado = int(input("Estado de asistencia (-1, 0, 1): "))
+                if estado not in [-1, 0, 1]:
+                    raise ValueError
+            except ValueError:
+                print("Estado inválido.")
+                continue
+            alumnos[str(legajo)] = {
+                "apellido": apellido,
+                "nombre": nombre,
+                "fecha": fecha,
+                "estado": estado
+            }
+            print("Alumno agregado.")
+
+        elif opcion == "3":
+            legajo = input("Ingrese legajo a modificar: ").strip()
+            if legajo not in alumnos:
+                print("No existe ese legajo.")
+                continue
+            print(f"Actual: {alumnos[legajo]}")
+            apellido = input("Nuevo apellido (deje vacío para no modificar): ").strip()
+            nombre = input("Nuevo nombre (deje vacío para no modificar): ").strip()
+            estado = input("Nuevo estado de asistencia (-1, 0, 1, vacío para no modificar): ").strip()
+            if apellido:
+                alumnos[legajo]["apellido"] = apellido.capitalize()
+            if nombre:
+                alumnos[legajo]["nombre"] = nombre.capitalize()
+            if estado in ["-1", "0", "1"]:
+                alumnos[legajo]["estado"] = int(estado)
+            print("Alumno modificado.")
+
+        elif opcion == "4":
+            legajo = input("Ingrese legajo a eliminar: ").strip()
+            if legajo in alumnos:
+                del alumnos[legajo]
+                print("Alumno eliminado.")
+            else:
+                print("No existe ese legajo.")
+
+        elif opcion == "5":
+            break
+
+        else:
+            print("Opción inválida.")
+
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            json.dump(alumnos, archivo)
+
