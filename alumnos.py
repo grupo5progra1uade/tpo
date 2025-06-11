@@ -8,11 +8,11 @@ matriznx5 = []
 
 # Precarga de alumnos
 matriznx5.extend([
-    [1001, "López",    "Ana",    "2024-08-15", 1],   # presente
-    [1002, "Martínez", "Bruno",  "2024-08-16", 0],   # ausente
-    [1003, "Ramírez",  "Clara",  "2024-08-17", -1],  # media falta
-    [1004, "Suárez",   "Diego",  "2024-08-18", 1],
-    [1005, "Fernández","Elena",  "2024-08-19", 0],
+    [1001, "López",    "Ana",    "2024-08-15", None],   # presente 1
+    [1002, "Martínez", "Bruno",  "2024-08-16", None],   # ausente 0 
+    [1003, "Ramírez",  "Clara",  "2024-08-17", None],  # media falta -1
+    [1004, "Suárez",   "Diego",  "2024-08-18", None],  #None para que no haya asistencia precargada
+    [1005, "Fernández","Elena",  "2024-08-19", None],
 ])
 
 def cargar_datos():
