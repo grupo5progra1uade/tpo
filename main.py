@@ -81,6 +81,9 @@ def gestion_alumnos(matriznx5):
             "Buscar alumno por legajo",
             "Modificar alumno",
             "Eliminar alumno",
+            "Exportar alumnos a JSON",
+            "Exportar alumnos a TXT",
+            "CRUD Alumnos JSON",
             "Volver"
         ])
         
@@ -99,6 +102,12 @@ def gestion_alumnos(matriznx5):
         elif opcion == "6":
             eliminar_alumno()
         elif opcion == "7":
+            exportar_alumnos_a_json()
+        elif opcion == "8":
+            exportar_alumnos_a_txt()
+        elif opcion == "9":
+            crud_alumnos_json()
+        elif opcion == "10":
             return
         else:
             input("Opción inválida. Presione Enter para continuar...")
