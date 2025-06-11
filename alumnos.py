@@ -220,7 +220,7 @@ def exportar_alumnos_a_txt(nombre_archivo="alumnos_lista.txt"):
 def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
     try:
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
-            json.dump(matriz_a_dict_alumnos(matriznx5), archivo)
+            json.dump(matriz_a_dict_alumnos(matriznx5), archivo,ensure_ascii=False, indent=4)
         print(f"Archivo .json generado correctamente.")
     except Exception as error:
         print(f"Error al generar el archivo: {error}")
