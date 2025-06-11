@@ -85,14 +85,18 @@ def cambiar_contraseña():
 
 
 def agregar_profesor(dic_profes):
+    # Crear un conjunto con todas las palabras clave ya existentes
+    palabras_clave_existentes = set(dic_profes.keys())
+
     while True:
         clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
         if not clave.isalpha():
             print("Error: La palabra de seguridad debe contener solo letras.")
-        elif clave in dic_profes:
+        elif clave in palabras_clave_existentes:
             print("Esa palabra clave ya está en uso. Intente otra.")
         else:
             break
+
 
 
     while True:
