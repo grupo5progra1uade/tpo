@@ -3,6 +3,7 @@ from alumnos import get_alumnos
 # Precarga de materias
 materias = ["Matematica", "Historia", "Programacion"]
 
+"""
 # Precarga de asistencias relacionadas con los alumnos de alumnos.py
 asistencias_por_materia = {
     "Matematica": [
@@ -25,7 +26,8 @@ for materia in materias:
     asistencias_por_materia[materia] = [
         [alumno[0], alumno[4]] for alumno in alumnos_precargados
     ]
-
+"""
+#comento asistencia precargada
 def mostrar_materias(lista_materias):
     print("\nMaterias del curso:")
     for i, materia in enumerate(lista_materias):

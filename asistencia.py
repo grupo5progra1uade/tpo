@@ -2,7 +2,7 @@ from datetime import datetime
 from alumnos import *
 registro = []
 asistencias = []
-
+"""
 # Precarga de asistencias relacionadas con los alumnos de alumnos.py
 registro.extend([
     {
@@ -28,7 +28,8 @@ registro.extend([
         ]
     }
 ])
-
+"""
+#comento asistencia precargada
 
 def registrar_asistencia(alumnos, registro, materias_tuple):
     
