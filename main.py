@@ -151,23 +151,26 @@ def gestion_materias(materias):
             input("Opción inválida. Presione Enter...")
 
 def consultar_asistencias(registro, matriznx5):
-    while True:
-        mostrar_menu("Asistencias", [
-            "Por alumno",
-            "Listado general",
-            "Volver"
-        ])
-        
-        opcion = input("Opción: ").strip()
-        
-        if opcion == "1":
-            mostrar_asistencia_alumno(registro, matriznx5)
-        elif opcion == "2":
-            mostrar_asistencia_general(registro)
-        elif opcion == "3":
-            return
-        else:
-            input("Opción inválida. Presione Enter...")
+    mostrar_menu("Asistencias", [
+    "Por alumno",
+    "Listado general",
+    "Modificar asistencia por materia",
+    "Volver"
+])
+
+opcion = input("Opción: ").strip()
+
+if opcion == "1":
+    mostrar_asistencia_alumno(registro, matriznx5)
+elif opcion == "2":
+    mostrar_asistencia_general(registro)
+elif opcion == "3":
+    modificar_asistencia_alumno(registro, materias, matriznx5)
+elif opcion == "4":
+    return
+else:
+    input("Opción inválida. Presione Enter...")
+
 
 if __name__ == "__main__":
     if pre_menu() == True:

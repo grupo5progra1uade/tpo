@@ -145,6 +145,53 @@ def mostrar_asistencia_general(registro):
         print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
         print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
         print(f"Asistencia efectiva: {porcentaje:.2f}%")
+def modificar_asistencia_alumno(registro, materias, matriznx5):
+    try:
+        legajo = int(input("Ingrese legajo del alumno: "))
+    except ValueError:
+        print("Legajo inválido.")
+        return
 
+    # Buscar alumno y su índice
+    indice_alumno = -1
+    for i in range(len(matriznx5)):
+        if matriznx5[i][0] == legajo:
+            indice_alumno = i
+            alumno = matriznx5[i]
+            break
+
+    if indice_alumno == -1:
+        print("Alumno no encontrado.")
+        return
+
+    print(f"\nAsistencias registradas para {alumno[2]} {alumno[1]}:")
+
+    for i in range(len(registro)):
+        print(f"{i + 1}. {registro[i]['materia']} - {registro[i]['fecha']}")
+
+    try:
+        opcion = int(input("Seleccione una opción: ")) - 1
+        if opcion < 0 or opcion >= len(registro):
+            print("Opción fuera de rango.")
+            return
+    except ValueError:
+        print("Entrada inválida.")
+        return
+
+    asistencias = registro[opcion]['asistencias']
+
+    if indice_alumno >= len(asistencias):
+        print("No hay registro de asistencia para este alumno en esa materia.")
+        return
+
+    try:
+        nuevo_estado = int(input("Ingrese nuevo estado (1 = presente, 0 = ausente, -1 = media falta): "))
+        if nuevo_estado in [1, 0, -1]:
+            asistencias[indice_alumno] = nuevo_estado
+            print("Asistencia modificada con éxito.")
+        else:
+            print("Estado inválido.")
+    except ValueError:
+        print("Entrada inválida.")
 
 
