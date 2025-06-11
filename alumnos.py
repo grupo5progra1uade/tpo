@@ -278,6 +278,7 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
                 "fecha": fecha,
                 "estado": estado
             }
+            matriznx5.extend([[legajo, apellido, nombre, fecha, estado]]) #aca se guarda y actualiza la matriznx5
             print("Alumno agregado.")
 
         elif opcion == "3":
