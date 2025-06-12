@@ -11,7 +11,7 @@ matriznx5.extend([
     [1001, "López",    "Ana",    "2024-08-15", None],   # presente 1
     [1002, "Martínez", "Bruno",  "2024-08-16", None],   # ausente 0 
     [1003, "Ramírez",  "Clara",  "2024-08-17", None],  # media falta -1
-    [1004, "Suárez",   "Diego",  "2024-08-18", None],  #None para que no haya asistencia precargada
+    [1004, "Suárez",   "Diego",  "2024-08-18", None],  #None para que no haya
     [1005, "Fernández","Elena",  "2024-08-19", None],
 ])
 
@@ -63,21 +63,21 @@ def cargar_datos():
 
 def imprimir_matriz():
     print("Registro de asistencia")
-    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     | Presente")
-    print("-" * 75)
+    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")
+    print("-" * 60)  # Ajusté la línea de separación porque ahora es más corta
     for fila in matriznx5:
-        valor = fila[4] if fila[4] is not None else 'Sin registro'
-        print(f"{str(fila[0]):<6} | {str(fila[1]):<18} | {str(fila[2]):<18} | {str(fila[3])} | {str(valor):<10}")
+        # Ya no necesitamos valor ni la columna presente
+        print(f"{str(fila[0]):<6} | {str(fila[1]):<18} | {str(fila[2]):<18} | {str(fila[3])}")
+
 
 
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
-    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     | Presente")
-    print("-" * 75)
+    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")
+    print("-" * 60)
     alumnos_ordenados = sorted(matriznx5, key=lambda alumno: alumno[1].lower())
     for fila in alumnos_ordenados:
-        valor = fila[4] if fila[4] is not None else 'Sin registro'
-        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13} | {valor:<10}")
+        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13}")
 
 def buscar_alumno_por_legajo():
     while True:

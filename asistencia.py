@@ -169,29 +169,5 @@ def modificar_asistencia_alumno(registro, materias, matriznx5):
     for i in range(len(registro)):
         print(f"{i + 1}. {registro[i]['materia']} - {registro[i]['fecha']}")
 
-    try:
-        opcion = int(input("Seleccione una opción: ")) - 1
-        if opcion < 0 or opcion >= len(registro):
-            print("Opción fuera de rango.")
-            return
-    except ValueError:
-        print("Entrada inválida.")
-        return
-
-    asistencias = registro[opcion]['asistencias']
-
-    if indice_alumno >= len(asistencias):
-        print("No hay registro de asistencia para este alumno en esa materia.")
-        return
-
-    try:
-        nuevo_estado = int(input("Ingrese nuevo estado (1 = presente, 0 = ausente, -1 = media falta): "))
-        if nuevo_estado in [1, 0, -1]:
-            asistencias[indice_alumno] = nuevo_estado
-            print("Asistencia modificada con éxito.")
-        else:
-            print("Estado inválido.")
-    except ValueError:
-        print("Entrada inválida.")
-
-
+    print("\nLa modificación de asistencias no está permitida.")
+    input("Presione Enter para volver...")
