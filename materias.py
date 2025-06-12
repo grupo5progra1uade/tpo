@@ -3,7 +3,7 @@ from alumnos import get_alumnos
 # Precarga de materias
 materias = ["Matematica", "Historia", "Programacion"]
 
-"""
+
 # Precarga de asistencias relacionadas con los alumnos de alumnos.py
 asistencias_por_materia = {
     "Matematica": [
@@ -26,8 +26,8 @@ for materia in materias:
     asistencias_por_materia[materia] = [
         [alumno[0], alumno[4]] for alumno in alumnos_precargados
     ]
-"""
-#comento asistencia precargada
+
+
 def mostrar_materias(lista_materias):
     print("\nMaterias del curso:")
     for i, materia in enumerate(lista_materias):
@@ -77,13 +77,20 @@ def agregar_materia(lista_materias):
             print(f"Error: {error}. Vuelva a ingresar la materia")
 
 def borrar_materia(lista_materias):
-    materia_a_borrar = input("Nombre de la materia a borrar: ").capitalize()
+    materia_a_borrar = input("Nombre de la materia a borrar: ").strip().lower()
     
-    if materia_a_borrar in lista_materias:
-        confirmacion = input(f"¿Está seguro que desea eliminar la materia '{materia_a_borrar}'? (s/n): ").strip().lower()
+    # Buscar la materia en la lista ignorando mayúsculas/minúsculas
+    materia_encontrada = None
+    for materia in lista_materias:
+        if materia.lower() == materia_a_borrar:
+            materia_encontrada = materia
+            break
+    
+    if materia_encontrada:
+        confirmacion = input(f"¿Está seguro que desea eliminar la materia '{materia_encontrada}'? (s/n): ").strip().lower()
         if confirmacion == "s":
-            lista_materias.remove(materia_a_borrar)
-            asistencias_por_materia.pop(materia_a_borrar, None)
+            lista_materias.remove(materia_encontrada)
+            asistencias_por_materia.pop(materia_encontrada, None)
             print("¡Materia eliminada con éxito!")
         else:
             print("Operación cancelada. La materia no fue eliminada.")
