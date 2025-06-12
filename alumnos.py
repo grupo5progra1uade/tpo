@@ -195,14 +195,19 @@ def eliminar_alumno():
             legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
             break
         except ValueError:
-            print("Ingrese un numero entero")
-            
+            print("Ingrese un número entero.")
+
     for i in range(len(matriznx5)):
         if matriznx5[i][0] == legajo_buscado:
-            print(f"\nEliminando alumno: {matriznx5[i][1]} {matriznx5[i][2]}")
-            del matriznx5[i]
-            print("Alumno eliminado con éxito.")
+            print(f"\nAlumno encontrado: {matriznx5[i][1]} {matriznx5[i][2]}")
+            confirmacion = input("¿Está seguro que desea eliminar este alumno? (s/n): ").strip().lower()
+            if confirmacion == "s":
+                del matriznx5[i]
+                print("Alumno eliminado con éxito.")
+            else:
+                print("Operación cancelada. El alumno no fue eliminado.")
             return
+
     print("No se encontró un alumno con ese legajo.")
 
 def exportar_alumnos_a_txt(nombre_archivo="alumnos_lista.txt"):

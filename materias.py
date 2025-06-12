@@ -78,13 +78,20 @@ def agregar_materia(lista_materias):
 
 def borrar_materia(lista_materias):
     materia_a_borrar = input("Nombre de la materia a borrar: ").capitalize()
+    
     if materia_a_borrar in lista_materias:
-        lista_materias.remove(materia_a_borrar)
-        asistencias_por_materia.pop(materia_a_borrar, None)
-        print("Materia eliminada con éxito!")
+        confirmacion = input(f"¿Está seguro que desea eliminar la materia '{materia_a_borrar}'? (s/n): ").strip().lower()
+        if confirmacion == "s":
+            lista_materias.remove(materia_a_borrar)
+            asistencias_por_materia.pop(materia_a_borrar, None)
+            print("¡Materia eliminada con éxito!")
+        else:
+            print("Operación cancelada. La materia no fue eliminada.")
     else:
         print("La materia no existe en la lista.")
+    
     return lista_materias
+
 
 def registrar_asistencia_en_materia(materias, alumnos):
     if materias not in asistencias_por_materia:
