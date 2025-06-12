@@ -1,8 +1,6 @@
 Legajo,Apellido,Nombre,Fecha,Presente
-1001,López,Ana,2024-08-15,1
-1002,Martínez,Bruno,2024-08-16,0
-1003,Ramírez,Clara,2024-08-17,-1
-1004,Suárez,Diego,2024-08-18,1
-1005,Fernández,Elena,2024-08-19,0
-23423432,Wwerew,Rewwewr,2025-06-11,1
-1006,Sadsd,Sadsad,2025-06-11,Sin registro
+1001,López,Ana,2024-08-15,Sin registro
+1002,Martínez,Bruno,2024-08-16,Sin registro
+1003,Ramírez,Clara,2024-08-17,Sin registro
+1004,Suárez,Diego,2024-08-18,Sin registro
+1005,Fernández,Elena,2024-08-19,Sin registro
