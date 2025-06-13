@@ -12,6 +12,7 @@ def construir_indice(dic):
 
 indice_seguridad = construir_indice(profesores)
 
+
 def mostrar_profesores():
     print("\nProfesores del curso:")
     print("Nombre             | Apellido                | Email                   | Materia")
@@ -84,10 +85,24 @@ def cambiar_contraseña():
     return False
 
 
-def agregar_profesor(dic_profes):
-    # Crear un conjunto con todas las palabras clave ya existentes
-    palabras_clave_existentes = set(dic_profes.keys())
+def pedir_palabra_segura(dic_profes):
+    clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
+    if not clave.isalpha():
+        print("Error: La palabra de seguridad debe contener solo letras.")
+        return pedir_palabra_segura(dic_profes)
+    elif clave in dic_profes.keys():
+        print("Esa palabra clave ya está en uso. Intente otra.")
+        return pedir_palabra_segura(dic_profes)
+    
+    return clave
 
+
+def agregar_profesor(dic_profes):
+    
+   
+
+
+    ''' Reemplazando por recursividad 
     while True:
         clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
         if not clave.isalpha():
@@ -97,7 +112,10 @@ def agregar_profesor(dic_profes):
         else:
             break
 
+    '''
 
+    clave = pedir_palabra_segura(dic_profes)
+    
 
     while True:
         nombre = input("Ingrese el nombre del profesor: ").strip()
@@ -154,11 +172,11 @@ def agregar_profesor(dic_profes):
         "seguridad": clave,
         "materia": asignatura
     }
+    print("\n¡Profesor agregado con éxito!")
 
-    print("Profesor agregado con éxito.")
 
-
-def modificar_profesor(dic, clave, indice):
+def modificar_profesor(dic, clave):
+    ''''
     id_profesor = indice.get(clave)
 
     if id_profesor is None:
@@ -166,6 +184,18 @@ def modificar_profesor(dic, clave, indice):
         return
 
     datos = dic[id_profesor]
+'''
+    profesor_encontrado = None
+
+    for datos in dic.values():
+        if datos.get("seguridad") == clave:
+            profesor_encontrado = datos
+            break
+
+    if profesor_encontrado is None:
+        print("No se encontró un profesor con esa palabra clave.")
+        return False
+
 
     print("\nProfesor encontrado:")
     print("Nombre: ", datos["nombre"])

@@ -6,11 +6,12 @@ from profesores import *
 
 
 def pre_menu():
+    global indice_seguridad
     while True:
         print("\nMenú de Profesores")
         print("1. Ingresar")
-        print("2. Modificar profesor")
-        print("3. Cargar nuevo profesor")
+        print("2. Cargar nuevo profesor")
+        print("3. Modificar profesor")
         print("4. Mostrar listado de profesores")
         print("5. Cambiar contraseña")
         print("6. Salir")
@@ -22,14 +23,15 @@ def pre_menu():
                 return True
 
         elif opcion == "2":
-            palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
-            if modificar_profesor(profesores, palabra_clave, indice_seguridad):  
+            if agregar_profesor(profesores):
+                indice_seguridad = construir_indice(profesores)  # Actualiza el índice de seguridad
                 return True
             
         elif opcion == "3":
-            if agregar_profesor(profesores):  
-                return True  
-        
+                palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
+                if modificar_profesor(profesores, palabra_clave):  
+                    return True
+                  
         elif opcion == "4":
             if mostrar_profesores():  
                 return True  
