@@ -6,7 +6,7 @@ from profesores import *
 
 
 def pre_menu():
-    global indice_seguridad
+    
     while True:
         print("\nMenú de Profesores")
         print("1. Ingresar")
