@@ -63,7 +63,7 @@ def cargar_datos():
 
 def imprimir_matriz():
     print("Registro de asistencia")
-    print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")
+    print("Legajo |    Apellido        |   Nombre          |    Fecha     ")
     print("-" * 60)  # Ajusté la línea de separación porque ahora es más corta
     for fila in matriznx5:
         # Ya no necesitamos valor ni la columna presente
