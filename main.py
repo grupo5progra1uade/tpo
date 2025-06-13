@@ -24,7 +24,6 @@ def pre_menu():
 
         elif opcion == "2":
             if agregar_profesor(profesores):
-                indice_seguridad = construir_indice(profesores)  # Actualiza el índice de seguridad
                 return True
             
         elif opcion == "3":

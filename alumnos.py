@@ -86,6 +86,7 @@ def buscar_alumno_por_legajo():
             break #sino hay error sale del bucle
         except ValueError:
             print("Ingrese un numero entero")
+            return buscar_alumno_por_legajo() #vuelve a pedir el legajo
     
     encontrado = False   
     for fila in matriznx5:
@@ -96,6 +97,7 @@ def buscar_alumno_por_legajo():
             return
     if not encontrado:
         print("No se encontró un alumno con ese legajo.")
+    return buscar_alumno_por_legajo()
             
 
 def get_alumnos():
