@@ -279,7 +279,7 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             alumnos = {}
 
         if opcion == "1":
-            print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")            
+            print("  Legajo  |    Apellido   |    Nombre     |     Estado     ")            
             print("-" * 50)
             for legajo in alumnos:
                 datos = alumnos[legajo]
@@ -289,28 +289,22 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
         elif opcion == "2":
             # Generar legajo automáticamente
             if alumnos:
-                max_legajo = max(int(l) for l in alumnos.keys()) # Busca el legajo máximo existente
+                max_legajo = max(int(i) for i in alumnos.keys())
                 legajo = max_legajo + 1
             else:
-                legajo = 1001  # Comienza desde 1001 si no hay alumnos
+                legajo = 1001
             print(f"Legajo asignado automáticamente: {legajo}")
             apellido = input("Apellido: ").strip().capitalize()
             nombre = input("Nombre: ").strip().capitalize()
             fecha = datetime.today().strftime("%Y-%m-%d")
-            try:
-                estado = int(input("Estado de asistencia (-1, 0, 1): "))
-                if estado not in [-1, 0, 1]:
-                    raise ValueError
-            except ValueError:
-                print("Estado inválido, debe ser -1, 0 o 1.")
-                continue
+            estado = None  # Estado inicial es None
             alumnos[str(legajo)] = {
                 "apellido": apellido,
                 "nombre": nombre,
                 "fecha": fecha,
                 "estado": estado
             }
-            matriznx5.extend([[legajo, apellido, nombre, fecha, estado]]) #aca se guarda y actualiza la matriznx5
+            matriznx5.extend([[legajo, apellido, nombre, fecha, estado]])
             print("Alumno agregado.")
 
         elif opcion == "3":
@@ -321,13 +315,10 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             print(f"Actual: {alumnos[legajo]}")
             apellido = input("Nuevo apellido (deje vacío para no modificar): ").strip()
             nombre = input("Nuevo nombre (deje vacío para no modificar): ").strip()
-            estado = input("Nuevo estado de asistencia (-1, 0, 1, vacío para no modificar): ").strip()
             if apellido:
                 alumnos[legajo]["apellido"] = apellido.capitalize()
             if nombre:
                 alumnos[legajo]["nombre"] = nombre.capitalize()
-            if estado in ["-1", "0", "1"]:
-                alumnos[legajo]["estado"] = int(estado)
             print("Alumno modificado.")
 
         elif opcion == "4":

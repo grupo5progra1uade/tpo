@@ -5,7 +5,6 @@ from utils import mostrar_menu
 from profesores import *
 
 
-
 def pre_menu():
     while True:
         print("\nMenú de Profesores")
@@ -81,7 +80,7 @@ def gestion_alumnos(matriznx5):
             "Buscar alumno por legajo",
             "Modificar alumno",
             "Eliminar alumno",
-            "Exportar alumnos a JSON",
+            "Exportar alumnos a JSON ordenado",
             "Exportar alumnos a TXT",
             "CRUD Alumnos JSON",
             "Volver"
