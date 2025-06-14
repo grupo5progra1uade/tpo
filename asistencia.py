@@ -146,29 +146,3 @@ def mostrar_asistencia_general(registro):
         print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
         print(f"Asistencia efectiva: {porcentaje:.2f}%")
 
-def modificar_asistencia_alumno(registro, materias, matriznx5):
-    try:
-        legajo = int(input("Ingrese legajo del alumno: "))
-    except ValueError:
-        print("Legajo inválido.")
-        return
-
-    # Buscar alumno y su índice
-    indice_alumno = -1
-    for i in range(len(matriznx5)):
-        if matriznx5[i][0] == legajo:
-            indice_alumno = i
-            alumno = matriznx5[i]
-            break
-
-    if indice_alumno == -1:
-        print("Alumno no encontrado.")
-        return
-
-    print(f"\nAsistencias registradas para {alumno[2]} {alumno[1]}:")
-
-    for i in range(len(registro)):
-        print(f"{i + 1}. {registro[i]['materia']} - {registro[i]['fecha']}")
-
-    print("\nLa modificación de asistencias no está permitida.")
-    input("Presione Enter para volver...")
