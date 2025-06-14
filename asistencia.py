@@ -145,6 +145,7 @@ def mostrar_asistencia_general(registro):
         print(f"\nMateria: {item['materia']} | Fecha: {item['fecha']}")
         print(f"Presentes: {presentes} | Medias faltas: {medias} | Ausentes: {ausentes}")
         print(f"Asistencia efectiva: {porcentaje:.2f}%")
+
 def modificar_asistencia_alumno(registro, materias, matriznx5):
     try:
         legajo = int(input("Ingrese legajo del alumno: "))

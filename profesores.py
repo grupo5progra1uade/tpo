@@ -7,11 +7,6 @@ profesores = {
     3: {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Literatura"}
 }
 
-def construir_indice(dic):
-    return {datos["seguridad"]: id_prof for id_prof, datos in dic.items()} #crea un indice para seguridad
-
-indice_seguridad = construir_indice(profesores)
-
 
 def mostrar_profesores():
     print("\nProfesores del curso:")
@@ -20,7 +15,6 @@ def mostrar_profesores():
     for id, prof in profesores.items():
         print(f"{prof['nombre']:<20} | {prof['apellido']:<20} | {prof['email']:<25} | {prof['materia']}")
     print("-" * 80)
-
 
 def ingreso():
 
@@ -42,7 +36,6 @@ def ingreso():
 
     print("Has superado el número máximo de intentos. Intenta más tarde.")
     return False
-
 
 def cambiar_contraseña():
     intentos_email = 0
@@ -84,7 +77,6 @@ def cambiar_contraseña():
     print("Demasiados intentos fallidos con el email.")
     return False
 
-
 def pedir_palabra_segura(dic_profes):
     clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
     if not clave.isalpha():
@@ -96,26 +88,9 @@ def pedir_palabra_segura(dic_profes):
     
     return clave
 
-
 def agregar_profesor(dic_profes):
     
-   
-
-
-    ''' Reemplazando por recursividad 
-    while True:
-        clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
-        if not clave.isalpha():
-            print("Error: La palabra de seguridad debe contener solo letras.")
-        elif clave in palabras_clave_existentes:
-            print("Esa palabra clave ya está en uso. Intente otra.")
-        else:
-            break
-
-    '''
-
     clave = pedir_palabra_segura(dic_profes)
-    
 
     while True:
         nombre = input("Ingrese el nombre del profesor: ").strip()
@@ -174,17 +149,7 @@ def agregar_profesor(dic_profes):
     }
     print("\n¡Profesor agregado con éxito!")
 
-
 def modificar_profesor(dic, clave):
-    ''''
-    id_profesor = indice.get(clave)
-
-    if id_profesor is None:
-        print("No se encontró un profesor con esa palabra clave")
-        return
-
-    datos = dic[id_profesor]
-'''
     profesor_encontrado = None
 
     for datos in dic.values():
@@ -195,7 +160,6 @@ def modificar_profesor(dic, clave):
     if profesor_encontrado is None:
         print("No se encontró un profesor con esa palabra clave.")
         return False
-
 
     print("\nProfesor encontrado:")
     print("Nombre: ", datos["nombre"])

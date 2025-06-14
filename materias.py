@@ -77,12 +77,11 @@ def agregar_materia(lista_materias):
             print(f"Error: {error}. Vuelva a ingresar la materia")
 
 def borrar_materia(lista_materias):
-    materia_a_borrar = input("Nombre de la materia a borrar: ").strip().lower()
+    materia_a_borrar = input("Nombre de la materia a borrar: ").strip().capitalize()
     
-    # Buscar la materia en la lista ignorando mayúsculas/minúsculas
     materia_encontrada = None
     for materia in lista_materias:
-        if materia.lower() == materia_a_borrar:
+        if materia == materia_a_borrar:
             materia_encontrada = materia
             break
     
