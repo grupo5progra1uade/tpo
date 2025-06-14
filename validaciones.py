@@ -21,3 +21,11 @@ def validar_psw(nueva_contra): #crud profes
 def validar_mail(correo):
         patron = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
         return re.match(patron, correo) is not None
+
+def pedir_entero(mensaje):
+        while True:
+                entrada = input(mensaje)
+                try:
+                        return int(entrada)
+                except ValueError:
+                        print("Debe ingresar un número entero")

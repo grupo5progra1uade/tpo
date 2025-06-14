@@ -1,6 +1,7 @@
 Legajo,Apellido,Nombre,Fecha,Presente
-1001,López,Ana,2024-08-15,Sin registro
+1001,Fernandes,Bruno,2024-08-15,Sin registro
 1002,Martínez,Bruno,2024-08-16,Sin registro
 1003,Ramírez,Clara,2024-08-17,Sin registro
 1004,Suárez,Diego,2024-08-18,Sin registro
 1005,Fernández,Elena,2024-08-19,Sin registro
+1006,Hola,Hola,2025-06-12,Sin registro

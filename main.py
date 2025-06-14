@@ -30,7 +30,7 @@ def pre_menu():
                 palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
                 if modificar_profesor(profesores, palabra_clave):  
                     return True
-                  
+
         elif opcion == "4":
             if mostrar_profesores():  
                 return True  
@@ -59,7 +59,7 @@ def main():
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            gestion_alumnos(matriznx5)
+            gestion_alumnos()
         elif opcion == "2":
             registrar_asistencia(matriznx5, registro, materias)
         elif opcion == "3":
@@ -72,7 +72,7 @@ def main():
         else:
             input("Opción inválida. Presione Enter...")
 
-def gestion_alumnos(matriznx5):
+def gestion_alumnos():
     while True:
         mostrar_menu("Gestión de Alumnos", [
             "Crear y cargar alumnos",
@@ -81,7 +81,7 @@ def gestion_alumnos(matriznx5):
             "Buscar alumno por legajo",
             "Modificar alumno",
             "Eliminar alumno",
-            "Exportar alumnos a JSON ordenado",
+            "Guardar manualmente alumnos en JSON",
             "Exportar alumnos a TXT",
             "CRUD Alumnos JSON",
             "Volver"
@@ -99,8 +99,10 @@ def gestion_alumnos(matriznx5):
             buscar_alumno_por_legajo()
         elif opcion == "5":
             modificar_alumno()
+            exportar_alumnos_a_json()
         elif opcion == "6":
             eliminar_alumno()
+            exportar_alumnos_a_json()
         elif opcion == "7":
             exportar_alumnos_a_json()
         elif opcion == "8":
@@ -171,5 +173,6 @@ def consultar_asistencias(registro, matriznx5):
 
 if __name__ == "__main__":
     if pre_menu() == True:
+        exportar_alumnos_a_json()
         main()
 

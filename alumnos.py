@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from utils import *
 from functools import reduce
-from validaciones import letras_validas, capitalizar
+from validaciones import *
 
 matriznx5 = []
 
@@ -28,20 +28,16 @@ def cargar_datos():
     legajo_inicial = 1006 #empezamos en ese valor porque ya hay 5 alumnos precargados
 
     for fila in range(cantidad):
-        #saco el while porque no hay adentro una condicion q pueda romper el bucle
         legajo = legajo_inicial + fila
         if legajo not in legajos_existentes:
-            legajos_existentes.add(legajo)
-                
+            legajos_existentes.add(legajo)    
         else:
             legajo += 1  # se evita repetir legajo si ya existe
-            
-
 
         while True:
             apellido = input("Ingrese apellido del alumno: ").strip()
             if not apellido:
-                print("El apellido no puede estar vacío. Vuelva a ingresarlo.")
+                print("El apellido no puede estar vacío, vuelva a ingresarlo.")
             elif letras_validas(apellido):
                 apellido = capitalizar(apellido)
                 break
@@ -51,7 +47,7 @@ def cargar_datos():
         while True:
             nombre = input("Ingrese nombre del alumno: ").strip()
             if not nombre:
-                print("El nombre no puede estar vacío. Vuelva a ingresarlo.")
+                print("El nombre no puede estar vacío, vuelva a ingresarlo.")
             elif letras_validas(nombre):
                 nombre = capitalizar(nombre)
                 break
@@ -69,8 +65,6 @@ def imprimir_matriz():
         # Ya no necesitamos valor ni la columna presente
         print(f"{str(fila[0]):<6} | {str(fila[1]):<18} | {str(fila[2]):<18} | {str(fila[3])}")
 
-
-
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
     print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")
@@ -82,10 +76,10 @@ def imprimir_matriz_ordenada_por_apellido():
 def buscar_alumno_por_legajo():
     while True:
         try:
-            legajo_buscado = int(input("Ingrese el numero de legajo a buscar: "))
+            legajo_buscado = int(input("Ingrese el número de legajo del alumno: "))
             break #sino hay error sale del bucle
         except ValueError:
-            print("Ingrese un numero entero")
+            print("Debe ingresar un número entero")
             return buscar_alumno_por_legajo() #vuelve a pedir el legajo
     
     encontrado = False   
@@ -98,7 +92,6 @@ def buscar_alumno_por_legajo():
     if not encontrado:
         print("No se encontró un alumno con ese legajo.")
     return buscar_alumno_por_legajo()
-            
 
 def get_alumnos():
     return matriznx5
@@ -164,8 +157,8 @@ def modificar_alumno():
             legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
             break
         except ValueError:
-            print("Ingrese un numero entero")
-            
+            print("Debe ingresar un número entero")
+
     for fila in matriznx5:
         if fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
@@ -175,21 +168,33 @@ def modificar_alumno():
             print("Fecha: ", fila[3])
             print("Estado de presencia: ", fila[4])
 
-            nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
-            if nuevo_apellido.isalpha():
-                fila[1] = nuevo_apellido.capitalize()
+            while True:
+                nuevo_apellido = input("Ingrese un nuevo apellido (o deje vacío para no modificar): ").strip()
+                if not nuevo_apellido:
+                    break
+                elif letras_validas(nuevo_apellido):
+                    fila[1] = nuevo_apellido.capitalize()
+                    break
+                else:
+                    print("Solo puede ingresar letras o no modificar")
+            
+            while True:
+                nuevo_nombre = input("Ingrese un nuevo nombre (o deje vacío para no modificar): ").strip()
+                if not nuevo_nombre:
+                    break
+                elif letras_validas(nuevo_nombre):
+                    fila[2] = nuevo_nombre.capitalize()
+                    break
+                else:
+                    print("Solo puede ingresar letras o no modifcar")
 
-            nuevo_nombre = input("Ingrese nuevo nombre (deje vacío para no modificar): ").strip()
-            if nuevo_nombre.isalpha():
-                fila[2] = nuevo_nombre.capitalize()
-
-            nuevo_estado = input("Ingrese nuevo estado de asistencia (-1, 0, 1) o deje vacío para no modificar: ").strip()
-            if nuevo_estado in ["-1", "0", "1"]:
-                fila[4] = int(nuevo_estado)
+            print("Estado de presencia (no modificable)", fila[4])
+            
             print("\n¡Alumno modificado con éxito!")
+            exportar_alumnos_a_json()
             return
 
-    print("No se encontró un alumno con ese legajo.")
+    print("No se encontró un alumno con ese legajo.")
 
 def eliminar_alumno():
     while True:
@@ -197,7 +202,7 @@ def eliminar_alumno():
             legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
             break
         except ValueError:
-            print("Ingrese un número entero.")
+            print("Debe ingresar un número entero.")
 
     for i in range(len(matriznx5)):
         if matriznx5[i][0] == legajo_buscado:
@@ -261,7 +266,7 @@ def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
         print(f"Archivo .json generado correctamente y sincronizado.")
     except Exception as error:
         print(f"Error al generar el archivo: {error}")
-      
+
 def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
     while True:
         mostrar_menu("CRUD Alumnos (JSON)", [
@@ -296,37 +301,85 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             else:
                 legajo = 1001
             print(f"Legajo asignado automáticamente: {legajo}")
-            apellido = input("Apellido: ").strip().capitalize()
-            nombre = input("Nombre: ").strip().capitalize()
+            
+            while True:
+                apellido = input("Ingrese el apellido: ").strip()
+                if not apellido:
+                    print("El apellido no puede estar vacío")
+                elif letras_validas(apellido):
+                    apellido = capitalizar(apellido)
+                    break
+                else:
+                    print("Apellido inválido, debe ingresar solo letras y espacios")
+                    
+            while True:
+                nombre = input("Nombre: ").strip()
+                if not nombre:
+                    print("El nombre no puede quedar vacío")
+                elif letras_validas(nombre):
+                    nombre = capitalizar(nombre)
+                    break
+                else:
+                    print("El nombre es inválido, debe ingresar solo letras y espacios")
+                    
             fecha = datetime.today().strftime("%Y-%m-%d")
             estado = None  # Estado inicial es None
+            
             alumnos[str(legajo)] = {
                 "apellido": apellido,
                 "nombre": nombre,
                 "fecha": fecha,
                 "estado": estado
             }
-            matriznx5.extend([[legajo, apellido, nombre, fecha, estado]])
-            print("Alumno agregado.")
+            if not any(fila[0] == legajo for fila in matriznx5): #evita creacion de legajos duplicados x error
+                matriznx5.append([legajo, apellido, nombre, fecha, estado])
+            else:
+                print("Advertencia: el alumno ya existía, por ello, no se duplicó.")
+                
+            print("Alumno agregado con éxito!")
 
         elif opcion == "3":
-            legajo = input("Ingrese legajo a modificar: ").strip()
-            if legajo not in alumnos:
-                print("No existe ese legajo.")
-                continue
-            print(f"Actual: {alumnos[legajo]}")
-            apellido = input("Nuevo apellido (deje vacío para no modificar): ").strip()
-            nombre = input("Nuevo nombre (deje vacío para no modificar): ").strip()
-            if apellido:
-                alumnos[legajo]["apellido"] = apellido.capitalize()
-            if nombre:
-                alumnos[legajo]["nombre"] = nombre.capitalize()
-            print("Alumno modificado.")
+                legajo = pedir_entero("Ingrese legajo a modificar: ", minimo=1) #minimo 1 para que si o si sean (+)
+                    
+                if legajo not in alumnos:
+                    print("No existe ese legajo.")
+                    continue
+                    
+                print(f"Apellido actual: {alumnos[legajo]['apellido']}")
+                print(f"Nombre actual: {alumnos[legajo]['nombre']}")
+
+                while True:
+                    apellido = input("Nuevo apellido (deje vacío para no modificar): ").strip()
+                    if not apellido:
+                        break
+                    elif letras_validas(apellido):
+                        apellido = capitalizar(apellido)
+                        break
+                    else:
+                        print("Apellido inválido, debe ingresar solo letras y espacios")
+
+                while True:
+                    nombre = input("Nuevo nombre (deje vacío para no modificar): ").strip()
+                    if not nombre:
+                        break
+                    elif letras_validas(nombre):
+                        nombre = capitalizar(nombre)
+                        break
+                    else:
+                        print("El nombre es inválido, debe ingresar solo letras y espacios")
+                            
+                if apellido and apellido != alumnos[legajo]['apellido']:
+                    alumnos[legajo]['apellido'] = apellido
+                if nombre and nombre != alumnos[legajo]['nombre']:
+                    alumnos[legajo]['nombre'] = nombre
+                    
+                print("Alumno modificado con éxito!")
 
         elif opcion == "4":
             legajo = input("Ingrese legajo a eliminar: ").strip()
             if legajo in alumnos:
                 del alumnos[legajo]
+                matriznx5[:] = [fila for fila in matriznx5 if str(fila[0]) != legajo]
                 print("Alumno eliminado.")
             else:
                 print("No existe ese legajo.")
@@ -339,4 +392,4 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
 
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             json.dump(alumnos, archivo)
-
+            
