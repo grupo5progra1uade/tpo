@@ -13,6 +13,11 @@ matriznx5.extend([
     [1003, "Ramírez",  "Clara",  "2024-08-17", None],  
     [1004, "Suárez",   "Diego",  "2024-08-18", None],  #None para que no haya
     [1005, "Fernández","Elena",  "2024-08-19", None],
+    [1006, "Gómez",    "Francisco", "2024-08-20", None],
+    [1007, "Pérez",    "Gabriela",  "2024-08-21", None],
+    [1008, "Sánchez",  "Hugo",      "2024-08-22", None],
+    [1009, "Torres",   "Isabel",    "2024-08-23", None],
+    [1010, "Vega",     "Julián",    "2024-08-24", None],
 ])
 
 def cargar_datos():
