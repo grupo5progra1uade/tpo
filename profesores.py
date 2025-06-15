@@ -199,9 +199,7 @@ def modificar_profesor(dic, clave):
         nueva_psw = input("Ingrese su nueva contraseña (deje vacío para no modificar): ").strip()
         if not nueva_psw or validar_psw(nueva_psw):
             break
-        else:
-            print("Contraseña inválida. (Debe tener al menos 8 caracteres, un número y un caracter especial)")
-
+        
     while True:
         nueva_materia = input("Ingrese nueva materia (deje vacío para no modificar): ").strip()
         if not nueva_materia or letras_validas(nueva_materia):
