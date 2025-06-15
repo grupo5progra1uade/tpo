@@ -28,5 +28,35 @@
         "nombre": "Elena",
         "fecha": "2024-08-19",
         "estado": null
+    },
+    "1006": {
+        "apellido": "Gómez",
+        "nombre": "Francisco",
+        "fecha": "2024-08-20",
+        "estado": null
+    },
+    "1007": {
+        "apellido": "Pérez",
+        "nombre": "Gabriela",
+        "fecha": "2024-08-21",
+        "estado": null
+    },
+    "1008": {
+        "apellido": "Sánchez",
+        "nombre": "Hugo",
+        "fecha": "2024-08-22",
+        "estado": null
+    },
+    "1009": {
+        "apellido": "Torres",
+        "nombre": "Isabel",
+        "fecha": "2024-08-23",
+        "estado": null
+    },
+    "1010": {
+        "apellido": "Vega",
+        "nombre": "Julián",
+        "fecha": "2024-08-24",
+        "estado": null
     }
 }

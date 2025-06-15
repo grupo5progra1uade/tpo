@@ -30,7 +30,7 @@ def cargar_datos():
 
     legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None} 
 
-    legajo_inicial = 1006 #empezamos en ese valor porque ya hay 5 alumnos precargados
+    legajo_inicial = 1011 #empezamos en ese valor porque ya hay 5 alumnos precargados
 
     for fila in range(cantidad):
         legajo = legajo_inicial + fila
