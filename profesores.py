@@ -126,7 +126,7 @@ def agregar_profesor(dic_profes):
         elif validar_psw(contra):
             break
         else:
-            print("La contraseña es invalida")
+            print("La contraseña es inválida")
 
     while True:
         asignatura = input("Ingrese el nombre de la materia: ").strip()
@@ -168,24 +168,63 @@ def modificar_profesor(dic, clave):
     print("Contraseña: ", datos["contraseña"])
     print("Materia: ", datos["materia"])
 
-    nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
+    while True:
+        nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()
+        if not nuevo_apellido or letras_validas(nuevo_apellido):
+            break
+        else:
+            print("Debe ingresar un apellido que solo contenga letras")
     if nuevo_apellido:
-        datos["apellido"] = nuevo_apellido.capitalize()
+        nuevo_apellido = capitalizar(nuevo_apellido)
 
-    nuevo_nombre = input("Ingrese nuevo nombre (deje vacío para no modificar): ").strip()
+    while True:
+        nuevo_nombre = input("Ingrese nuevo nombre (deje vacío para no modificar): ").strip()
+        if not nuevo_nombre or letras_validas(nuevo_nombre):
+            break
+        else:
+            print("Debe ingresar un nombre que contenga solo letras")
     if nuevo_nombre:
-        datos["nombre"] = nuevo_nombre.capitalize()
+        nuevo_nombre = capitalizar(nuevo_nombre)
 
-    nuevo_email = input("Ingrese nuevo email (deje vacío para no modificar): ").strip()
+    while True:
+        nuevo_email = input("Ingrese nuevo email (deje vacío para no modificar): ").strip()
+        if not nuevo_email or validar_mail(nuevo_email):
+            break
+        else:
+            print("Debe ingresar un mail válido")
     if nuevo_email:
-        datos["email"] = nuevo_email.lower()
+        nuevo_email = nuevo_email.lower()
 
-    nueva_psw = input("Ingrese su nueva contraseña (deje vacío para no modificar): ").strip()
-    if nueva_psw:
-        datos["contraseña"] = validar_psw(nueva_psw)
+    while True:
+        nueva_psw = input("Ingrese su nueva contraseña (deje vacío para no modificar): ").strip()
+        if not nueva_psw or validar_psw(nueva_psw):
+            break
+        else:
+            print("Contraseña inválida. (Debe tener al menos 8 caracteres, un número y un caracter especial)")
 
-    nueva_materia = input("Ingrese nueva materia (deje vacío para no modificar): ").strip()
+    while True:
+        nueva_materia = input("Ingrese nueva materia (deje vacío para no modificar): ").strip()
+        if not nueva_materia or letras_validas(nueva_materia):
+            break
+        else:
+            print("La materia debe contener solo letras")
     if nueva_materia:
-        datos["materia"] = nueva_materia.capitalize()
+        nueva_materia = capitalizar(nueva_materia)
+
+    # Actualizaciones
+    if nuevo_apellido:
+        profesor_encontrado["apellido"] = nuevo_apellido
+
+    if nuevo_nombre:
+        profesor_encontrado["nombre"] = nuevo_nombre
+
+    if nuevo_email:
+        profesor_encontrado["email"] = nuevo_email
+
+    if nueva_psw:
+        profesor_encontrado["contraseña"] = nueva_psw
+
+    if nueva_materia:
+        profesor_encontrado["materia"] = nueva_materia
 
     print("\n¡Profesor modificado con éxito!")

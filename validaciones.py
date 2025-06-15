@@ -15,7 +15,7 @@ def validar_psw(nueva_contra): #crud profes
                 print("Contraseña válidada correctamente")
                 return True
         else:
-                print("Contraseña inválida. (Debe tener al menos 8 caracteres, un nuemro y un caracter especial)")
+                print("Contraseña inválida. (Debe tener al menos 8 caracteres, un numero y un caracter especial)")
                 return False
         
 def validar_mail(correo):
