@@ -344,14 +344,15 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             print("Alumno agregado con éxito!")
 
         elif opcion == "3":
-                legajo = pedir_entero("Ingrese legajo a modificar: ", minimo=1) #minimo 1 para que si o si sean (+)
+                legajo = pedir_entero("Ingrese legajo a modificar: ", 1) #minimo 1 para que si o si sean (+)
+                legajo_str = str(legajo)
                     
-                if legajo not in alumnos:
+                if legajo_str not in alumnos:
                     print("No existe ese legajo.")
                     continue
                     
-                print(f"Apellido actual: {alumnos[legajo]['apellido']}")
-                print(f"Nombre actual: {alumnos[legajo]['nombre']}")
+                print(f"Apellido actual: {alumnos[legajo_str]['apellido']}")
+                print(f"Nombre actual: {alumnos[legajo_str]['nombre']}")
 
                 while True:
                     apellido = input("Nuevo apellido (deje vacío para no modificar): ").strip()
@@ -373,10 +374,10 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
                     else:
                         print("El nombre es inválido, debe ingresar solo letras y espacios")
                             
-                if apellido and apellido != alumnos[legajo]['apellido']:
-                    alumnos[legajo]['apellido'] = apellido
-                if nombre and nombre != alumnos[legajo]['nombre']:
-                    alumnos[legajo]['nombre'] = nombre
+                if apellido and apellido != alumnos[legajo_str]['apellido']:
+                    alumnos[legajo_str]['apellido'] = apellido
+                if nombre and nombre != alumnos[legajo_str]['nombre']:
+                    alumnos[legajo_str]['nombre'] = nombre
                     
                 print("Alumno modificado con éxito!")
 

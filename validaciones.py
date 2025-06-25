@@ -22,7 +22,7 @@ def validar_mail(correo):
         patron = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
         return re.match(patron, correo) is not None
 
-def pedir_entero(mensaje):
+def pedir_entero(mensaje, minimo):
         while True:
                 entrada = input(mensaje)
                 try:

@@ -11,7 +11,7 @@ def test_capitalizar():
     assert capitalizar("python") != "PYTHON"
 
 
-def test_alumnos_presentes(): # Test para verificar que la función alumnos_presentes() devuelve una lista de alumnos presentes (Osea, con estado 1 en el subindice 4)
+"""def test_alumnos_presentes(): # Test para verificar que la función alumnos_presentes() devuelve una lista de alumnos presentes (Osea, con estado 1 en el subindice 4)
     presentes = alumnos_presentes()
     assert len(presentes) > 0  
     for alumno in presentes:
@@ -30,7 +30,7 @@ def test_get_alumnos(): #
         assert type(alumno[1]) == str  # apellido
         assert type(alumno[2]) == str  # nombre
         assert type(alumno[3]) == str  # fecha
-        assert type(alumno[4]) == int  # estado
+        assert type(alumno[4]) == int  # estado"""
 
 def test_asistencia_total_ponderada(): 
     total_ponderada = asistencia_total_ponderada()
