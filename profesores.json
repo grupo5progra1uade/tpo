@@ -1,0 +1,26 @@
+{
+    "1": {
+        "nombre": "Maria",
+        "apellido": "Gonzalez",
+        "email": "maria@gmail.com",
+        "contraseña": "Contra123",
+        "seguridad": "Pepita",
+        "materia": "Matematica"
+    },
+    "2": {
+        "nombre": "Juan",
+        "apellido": "Perez",
+        "email": "juan@gmail.com",
+        "contraseña": "Contra123",
+        "seguridad": "pepitas",
+        "materia": "Historia"
+    },
+    "3": {
+        "nombre": "Luis",
+        "apellido": "Ramirez",
+        "email": "luis@gmail.com",
+        "contraseña": "Contra123",
+        "seguridad": "pepita",
+        "materia": "Literatura"
+    }
+}

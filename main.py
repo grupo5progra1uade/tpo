@@ -14,7 +14,8 @@ def pre_menu():
         print("3. Modificar profesor")
         print("4. Mostrar listado de profesores")
         print("5. Cambiar contraseña")
-        print("6. Salir")
+        print("6. Eliminar profesor")
+        print("7. Salir")
         
         opcion = input("Seleccione una opción: ").strip()
         
@@ -39,6 +40,9 @@ def pre_menu():
             cambiar_contraseña()
 
         elif opcion == "6":
+            eliminar_profesor(profesores)
+
+        elif opcion == "7":
             print("Saliendo...")
             return False  
         else:

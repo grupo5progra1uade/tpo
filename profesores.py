@@ -1,18 +1,50 @@
 import pwinput
+import json
 from validaciones import *
 
-profesores = {
-    1: {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123" ,"seguridad": "Pepita","materia": "Matematica"},
-    2: {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123","seguridad": "pepitas", "materia": "Historia"},
-    3: {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Literatura"}
-}
+# Archivo JSON para almacenar profesores
+ARCHIVO_PROFESORES = "profesores.json"
 
+def cargar_profesores():
+    """Carga los profesores desde el archivo JSON"""
+    try:
+        with open(ARCHIVO_PROFESORES, 'r', encoding='utf-8') as archivo:
+            return json.load(archivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No se encontró el archivo de profesores o está corrupto. Se usará el diccionario por defecto.")
+        profesores = profesores_default()
+        guardar_profesores(profesores)
+        return profesores
+
+def profesores_default():
+    """Retorna el diccionario de profesores por defecto"""
+    return {
+        "1": {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123" ,"seguridad": "Pepita","materia": "Matematica"},
+        "2": {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123","seguridad": "pepitas", "materia": "Historia"},
+        "3": {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Literatura"}
+    }
+
+def guardar_profesores(profesores):
+    """Guarda los profesores en el archivo JSON"""
+    try:
+        with open(ARCHIVO_PROFESORES, 'w', encoding='utf-8') as archivo:
+            json.dump(profesores, archivo, indent=4, ensure_ascii=False)
+        return True
+    except Exception as e:
+        print(f"Error al guardar profesores: {e}")
+        return False
+
+# Cargar profesores al importar el módulo
+profesores = cargar_profesores()
 
 def mostrar_profesores():
+    # Cargar datos actualizados del archivo JSON
+    profesores_actuales = cargar_profesores()
+    
     print("\nProfesores del curso:")
     print("Nombre             | Apellido                | Email                   | Materia")
     print("-" * 80)
-    for id, prof in profesores.items():
+    for id, prof in profesores_actuales.items():
         print(f"{prof['nombre']:<20} | {prof['apellido']:<20} | {prof['email']:<25} | {prof['materia']}")
     print("-" * 80)
 
@@ -59,8 +91,13 @@ def cambiar_contraseña():
                     conf_contraseña = input("Confirme su nueva contraseña: ")
                     if contraseña == conf_contraseña:
                         profesor["contraseña"] = contraseña
-                        print("Contraseña cambiada con éxito.")
-                        return True
+                        # Guardar cambios en JSON
+                        if guardar_profesores(profesores):
+                            print("Contraseña cambiada con éxito.")
+                            return True
+                        else:
+                            print("Error al guardar los cambios. La contraseña no fue modificada.")
+                            return False
                     else:
                         print("Las contraseñas no coinciden. Intente nuevamente.")
                         return False
@@ -147,7 +184,16 @@ def agregar_profesor(dic_profes):
         "seguridad": clave,
         "materia": asignatura
     }
-    print("\n¡Profesor agregado con éxito!")
+    
+    # Guardar cambios en JSON
+    if guardar_profesores(dic_profes):
+        print("\n¡Profesor agregado con éxito!")
+        return True
+    else:
+        print("Error al guardar los cambios. El profesor no fue agregado.")
+        # Eliminar profesor en caso de error
+        dic_profes.pop(clave, None)
+        return False
 
 def modificar_profesor(dic, clave):
     profesor_encontrado = None
@@ -225,4 +271,56 @@ def modificar_profesor(dic, clave):
     if nueva_materia:
         profesor_encontrado["materia"] = nueva_materia
 
-    print("\n¡Profesor modificado con éxito!")
+    # Guardar cambios en JSON
+    if guardar_profesores(dic):
+        print("\n¡Profesor modificado con éxito!")
+        return True
+    else:
+        print("Error al guardar los cambios. Las modificaciones no fueron aplicadas.")
+        return False
+
+def eliminar_profesor(dic_profes):
+    """Elimina un profesor del sistema"""
+    print("\n=== ELIMINAR PROFESOR ===")
+    
+    # Mostrar lista de profesores disponibles
+    print("\nProfesores disponibles:")
+    print("ID  | Nombre             | Apellido                | Email                   | Materia")
+    print("-" * 85)
+    for id_prof, prof in dic_profes.items():
+        print(f"{id_prof:<4} | {prof['nombre']:<20} | {prof['apellido']:<20} | {prof['email']:<25} | {prof['materia']}")
+    print("-" * 85)
+    
+    # Solicitar ID del profesor a eliminar
+    while True:
+        id_eliminar = input("\nIngrese el ID del profesor a eliminar: ").strip()
+        if id_eliminar in dic_profes:
+            break
+        else:
+            print("ID no válido. Ingrese un ID de la lista anterior.")
+    
+    # Confirmar eliminación
+    profesor = dic_profes[id_eliminar]
+    print(f"\nProfesor a eliminar:")
+    print(f"Nombre: {profesor['nombre']} {profesor['apellido']}")
+    print(f"Email: {profesor['email']}")
+    print(f"Materia: {profesor['materia']}")
+    
+    confirmacion = input("\n¿Está seguro que desea eliminar este profesor? (s/n): ").strip().lower()
+    
+    if confirmacion in ['s', 'si', 'sí', 'y', 'yes']:
+        # Eliminar profesor
+        profesor_eliminado = dic_profes.pop(id_eliminar)
+        
+        # Guardar cambios en JSON
+        if guardar_profesores(dic_profes):
+            print(f"\n¡Profesor {profesor_eliminado['nombre']} {profesor_eliminado['apellido']} eliminado con éxito!")
+            return True
+        else:
+            print("Error al guardar los cambios. El profesor no fue eliminado.")
+            # Restaurar profesor en caso de error
+            dic_profes[id_eliminar] = profesor_eliminado
+            return False
+    else:
+        print("Eliminación cancelada.")
+        return False
