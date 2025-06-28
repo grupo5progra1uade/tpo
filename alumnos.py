@@ -331,13 +331,6 @@ def guardar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
                     "nombre": fila[2] if fila[2] else ""
                 }
         
-        # Crear backup antes de guardar
-        try:
-            import shutil
-            shutil.copy2(nombre_archivo, nombre_archivo + ".backup")
-        except:
-            pass  # Si no existe el archivo, no hay problema
-        
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             json.dump(alumnos_dict, archivo, ensure_ascii=False, indent=4)
         print("Alumnos guardados en JSON correctamente.")

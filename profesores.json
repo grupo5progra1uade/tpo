@@ -22,13 +22,5 @@
         "contraseña": "Contra123",
         "seguridad": "pepita",
         "materia": "Literatura"
-    },
-    "test": {
-        "nombre": "T",
-        "apellido": "T",
-        "email": "t@gmail.com",
-        "contraseña": "Contra123",
-        "seguridad": "test",
-        "materia": "Test"
     }
 }

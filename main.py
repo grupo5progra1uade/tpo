@@ -6,16 +6,22 @@ from profesores import *
 
 
 def pre_menu():
-    
     while True:
-        print("\nMenú de Profesores")
-        print("1. Ingresar")
-        print("2. Cargar nuevo profesor")
-        print("3. Modificar profesor")
+        print("\n" + "="*60)
+        print("      BIENVENIDO AL SISTEMA DE ASISTENCIA DE ALUMNOS")
+        print("="*60)
+        print("\nMENÚ DE PROFESORES")
+        print("-"*60)
+        print("En este menú puede gestionar el acceso y los datos de los profesores.")
+        print("Seleccione una opción para continuar:")
+        print("1. Ingresar (acceder al sistema principal)")
+        print("2. Cargar nuevo profesor (alta)")
+        print("3. Modificar profesor (editar datos)")
         print("4. Mostrar listado de profesores")
-        print("5. Cambiar contraseña")
-        print("6. Eliminar profesor")
-        print("7. Salir")
+        print("5. Cambiar contraseña de profesor")
+        print("6. Eliminar profesor (baja)")
+        print("7. Salir del sistema")
+        print("-"*60)
         
         opcion = input("Seleccione una opción: ").strip()
         
@@ -24,26 +30,28 @@ def pre_menu():
                 return True
 
         elif opcion == "2":
-            if agregar_profesor(profesores):
-                return True
+            print("\n--- ALTA DE NUEVO PROFESOR ---")
+            agregar_profesor(profesores)
             
         elif opcion == "3":
-                palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
-                if modificar_profesor(profesores, palabra_clave):  
-                    return True
+            print("\n--- MODIFICAR DATOS DE PROFESOR ---")
+            palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
+            modificar_profesor(profesores, palabra_clave)
 
         elif opcion == "4":
-            if mostrar_profesores():  
-                return True  
+            print("\n--- LISTADO DE PROFESORES ---")
+            mostrar_profesores()
 
         elif opcion == "5":
+            print("\n--- CAMBIAR CONTRASEÑA DE PROFESOR ---")
             cambiar_contraseña()
 
         elif opcion == "6":
+            print("\n--- ELIMINAR PROFESOR ---")
             eliminar_profesor(profesores)
 
         elif opcion == "7":
-            print("Saliendo...")
+            print("Saliendo... ¡Hasta luego!")
             return False  
         else:
             print("Opción inválida. Intente nuevamente.")
@@ -51,7 +59,11 @@ def pre_menu():
 
 def main():
     while True:
-
+        print("\n" + "="*60)
+        print("         SISTEMA DE ASISTENCIA - MENÚ PRINCIPAL")
+        print("="*60)
+        print("En este menú puede gestionar alumnos, registrar asistencias, materias y consultar información.")
+        print("Seleccione una opción para continuar:")
         mostrar_menu("Sistema de Asistencia", [
             "Gestión de Alumnos",
             "Registrar Asistencia",
@@ -78,6 +90,11 @@ def main():
 
 def gestion_alumnos():
     while True:
+        print("\n" + "-"*60)
+        print("           GESTIÓN DE ALUMNOS - ADMINISTRACIÓN")
+        print("-"*60)
+        print("En este menú puede listar, agregar, modificar, eliminar y buscar alumnos.")
+        print("Seleccione una opción para continuar:")
         mostrar_menu("Gestión de Alumnos", [
             "Listar alumnos",
             "Agregar alumno",
@@ -91,19 +108,24 @@ def gestion_alumnos():
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
+            print("\n--- LISTADO DE ALUMNOS ---")
             mostrar_alumnos()
             input("Presione Enter para continuar...")
         elif opcion == "2":
+            print("\n--- ALTA DE NUEVO ALUMNO ---")
             cargar_datos()
         elif opcion == "3":
+            print("\n--- MODIFICAR DATOS DE ALUMNO ---")
             modificar_alumno()
         elif opcion == "4":
+            print("\n--- ELIMINAR ALUMNO ---")
             eliminar_alumno()
-            exportar_alumnos_a_json()
         elif opcion == "5":
+            print("\n--- BUSCAR ALUMNO POR LEGAJO ---")
             buscar_alumno_por_legajo()
             input("Presione Enter para continuar...")
         elif opcion == "6":
+            print("\n--- ORDENAR ALUMNOS POR APELLIDO ---")
             ordenar_por_apellido()
             input("Presione Enter para continuar...")
         elif opcion == "7":
@@ -170,6 +192,5 @@ def consultar_asistencias(registro, matriznx5):
 
 if __name__ == "__main__":
     if pre_menu() == True:
-        exportar_alumnos_a_json()
         main()
 
