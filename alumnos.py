@@ -515,7 +515,7 @@ def inicializar_alumnos():
             else:
                 legajos.append(fila[0])
     
-    print(f"Matriz de alumnos cargada con {len(matriznx5)} alumnos.")
+    # No mostrar mensaje de inicialización al usuario
 
 # Inicializar al cargar el módulo
 inicializar_alumnos()
