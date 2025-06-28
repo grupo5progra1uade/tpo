@@ -79,18 +79,34 @@ def main():
 def gestion_alumnos():
     while True:
         mostrar_menu("Gestión de Alumnos", [
-            "CRUD Alumnos JSON",
-            "Guardar manualmente alumnos en JSON",
+            "Listar alumnos",
+            "Agregar alumno",
+            "Modificar alumno",
+            "Eliminar alumno",
+            "Buscar alumno por legajo",
+            "Ordenar alumnos por apellido",
             "Volver"
         ])
         
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
-            crud_alumnos_json()
+            mostrar_alumnos()
+            input("Presione Enter para continuar...")
         elif opcion == "2":
-            exportar_alumnos_a_json()
+            cargar_datos()
         elif opcion == "3":
+            modificar_alumno()
+        elif opcion == "4":
+            eliminar_alumno()
+            exportar_alumnos_a_json()
+        elif opcion == "5":
+            buscar_alumno_por_legajo()
+            input("Presione Enter para continuar...")
+        elif opcion == "6":
+            ordenar_por_apellido()
+            input("Presione Enter para continuar...")
+        elif opcion == "7":
             return
         else:
             input("Opción inválida. Presione Enter para continuar...")

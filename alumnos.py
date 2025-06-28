@@ -20,27 +20,49 @@ matriznx5.extend([
     [1010, "Vega", "Julián"],
 ])
 
+def validar_matriz():
+    """Valida que todos los elementos de la matriz tengan al menos 3 campos"""
+    return all(len(fila) >= 3 for fila in matriznx5)
+
+def legajo_existe(legajo):
+    """Verifica si un legajo ya existe en la matriz"""
+    return any(fila[0] == legajo for fila in matriznx5 if len(fila) >= 1)
+
+def obtener_siguiente_legajo():
+    """Obtiene el siguiente legajo disponible"""
+    if not matriznx5:
+        return 1001
+    legajos_existentes = [fila[0] for fila in matriznx5 if len(fila) >= 1 and fila[0] is not None]
+    return max(legajos_existentes) + 1 if legajos_existentes else 1001
+
+def limpiar_matriz():
+    """Elimina filas inválidas de la matriz y retorna la matriz limpia"""
+    matriz_limpia = [fila for fila in matriznx5 if len(fila) >= 3 and fila[0] is not None]
+    return matriz_limpia
+
 def cargar_datos():
     
     try:
         cantidad = int(input("¿Cuántos alumnos desea cargar?: "))
+        if cantidad <= 0:
+            print("La cantidad debe ser un número positivo.")
+            return
     except ValueError:
         print("Entrada inválida. Debe ser un número entero.")
         return
 
-    legajos_existentes = {fila[0] for fila in matriznx5 if fila[0] is not None} 
-
-    legajo_inicial = 1011 #empezamos en ese valor porque ya hay 5 alumnos precargados
-
+    # Validar matriz antes de cargar
+    if not validar_matriz():
+        print("Advertencia: La matriz contiene datos inválidos.")
+    
+    alumnos_agregados = 0
+    
     for fila in range(cantidad):
-        legajo = legajo_inicial + fila
-        if legajo not in legajos_existentes:
-            legajos_existentes.add(legajo)    
-        else:
-            legajo += 1  # se evita repetir legajo si ya existe
-
+        # Obtener siguiente legajo disponible
+        legajo = obtener_siguiente_legajo()
+        
         while True:
-            apellido = input("Ingrese apellido del alumno: ").strip()
+            apellido = input(f"Ingrese apellido del alumno {fila + 1}: ").strip()
             if not apellido:
                 print("El apellido no puede estar vacío, vuelva a ingresarlo.")
             elif letras_validas(apellido):
@@ -50,7 +72,7 @@ def cargar_datos():
                 print("Ingreso mal un apellido, vuelva a ingresarlo.")
 
         while True:
-            nombre = input("Ingrese nombre del alumno: ").strip()
+            nombre = input(f"Ingrese nombre del alumno {fila + 1}: ").strip()
             if not nombre:
                 print("El nombre no puede estar vacío, vuelva a ingresarlo.")
             elif letras_validas(nombre):
@@ -61,42 +83,74 @@ def cargar_datos():
 
         fecha = datetime.today().strftime("%Y-%m-%d")
         matriznx5.append([legajo, apellido, nombre, fecha, None])
+        alumnos_agregados += 1
+        print(f"Alumno {nombre} {apellido} agregado con legajo {legajo}")
+
+    # Guardar automáticamente en JSON después de cargar
+    if alumnos_agregados > 0:
+        guardar_alumnos_a_json()
+        print(f"\nSe agregaron {alumnos_agregados} alumnos exitosamente.")
 
 def imprimir_matriz():
     print("Registro de asistencia")
     print("Legajo |    Apellido        |   Nombre          |    Fecha     ")
     print("-" * 60)  # Ajusté la línea de separación porque ahora es más corta
     for fila in matriznx5:
-        # Ya no necesitamos valor ni la columna presente
-        print(f"{str(fila[0]):<6} | {str(fila[1]):<18} | {str(fila[2]):<18} | {str(fila[3])}")
+        # Verificar que la fila tenga al menos 3 elementos
+        if len(fila) >= 3:
+            legajo = str(fila[0]) if fila[0] is not None else ""
+            apellido = str(fila[1]) if fila[1] is not None else ""
+            nombre = str(fila[2]) if fila[2] is not None else ""
+            fecha = str(fila[3]) if len(fila) > 3 and fila[3] is not None else ""
+            print(f"{legajo:<6} | {apellido:<18} | {nombre:<18} | {fecha}")
 
 def imprimir_matriz_ordenada_por_apellido():
     print("Registro de asistencia (Ordenado por Apellido)")
     print("  Legajo  |    Apellido   |    Nombre     |     Fecha     ")
     print("-" * 60)
-    alumnos_ordenados = sorted(matriznx5, key=lambda alumno: alumno[1].lower())
+    # Filtrar solo filas que tengan al menos 3 elementos
+    filas_validas = [fila for fila in matriznx5 if len(fila) >= 3]
+    alumnos_ordenados = sorted(filas_validas, key=lambda alumno: alumno[1].lower() if alumno[1] else "")
     for fila in alumnos_ordenados:
-        print(f"{fila[0]:<9} | {fila[1]:<13} | {fila[2]:<13} | {fila[3]:<13}")
+        legajo = str(fila[0]) if fila[0] is not None else ""
+        apellido = str(fila[1]) if fila[1] is not None else ""
+        nombre = str(fila[2]) if fila[2] is not None else ""
+        fecha = str(fila[3]) if len(fila) > 3 and fila[3] is not None else ""
+        print(f"{legajo:<9} | {apellido:<13} | {nombre:<13} | {fecha:<13}")
 
 def buscar_alumno_por_legajo():
-    while True:
-        try:
-            legajo_buscado = int(input("Ingrese el número de legajo del alumno: "))
-            break #sino hay error sale del bucle
-        except ValueError:
-            print("Debe ingresar un número entero")
-            return buscar_alumno_por_legajo() #vuelve a pedir el legajo
+    # Validar matriz antes de operar
+    if not validar_matriz():
+        print("Error: La matriz contiene datos inválidos.")
+    
+    if not matriznx5:
+        print("No hay alumnos para buscar.")
+        return
+    
+    try:
+        legajo_buscado = int(input("Ingrese el número de legajo del alumno: "))
+        if legajo_buscado <= 0:
+            print("El legajo debe ser un número positivo.")
+            return
+    except ValueError:
+        print("Debe ingresar un número entero válido.")
+        return
     
     encontrado = False   
     for fila in matriznx5:
-        if fila[0] == legajo_buscado:
-            resultado = print("\nAlumno encontrado:")
-            encontrado = True #se encuentra el legajo
-            print(f"Legajo: {fila[0]} - Apellido: {fila[1]} - Nombre: {fila[2]} - Fecha: {fila[3]} - Presente: {fila[4]}")
+        if len(fila) >= 3 and fila[0] == legajo_buscado:
+            print("\nAlumno encontrado:")
+            encontrado = True
+            print(f"Legajo: {fila[0]}")
+            print(f"Apellido: {fila[1]}")
+            print(f"Nombre: {fila[2]}")
+            print(f"Fecha: {fila[3] if len(fila) > 3 else 'No disponible'}")
+            print(f"Presente: {fila[4] if len(fila) > 4 else 'No disponible'}")
             return
+    
     if not encontrado:
-        print("No se encontró un alumno con ese legajo.")
-    return buscar_alumno_por_legajo()
+        print(f"No se encontró un alumno con el legajo {legajo_buscado}.")
+        print("Use la opción 'Listar alumnos' para ver los legajos disponibles.")
 
 def get_alumnos():
     return matriznx5
@@ -157,21 +211,33 @@ def matriz_a_dict_alumnos(matriz):
     }
 
 def modificar_alumno():
-    while True:
-        try:
-            legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
-            break
-        except ValueError:
-            print("Debe ingresar un número entero")
+    # Validar matriz antes de operar
+    if not validar_matriz():
+        print("Error: La matriz contiene datos inválidos.")
+    
+    if not matriznx5:
+        print("No hay alumnos para modificar.")
+        return
+    
+    try:
+        legajo_buscado = int(input("Ingrese el número de legajo del alumno a modificar: "))
+        if legajo_buscado <= 0:
+            print("El legajo debe ser un número positivo.")
+            return
+    except ValueError:
+        print("Debe ingresar un número entero válido.")
+        return
 
     for fila in matriznx5:
-        if fila[0] == legajo_buscado:
+        if len(fila) >= 1 and fila[0] == legajo_buscado:
             print("\nAlumno encontrado:")
             print("Legajo: ", fila[0])
             print("Apellido: ",fila[1])
             print("Nombre: ", fila[2])
-            print("Fecha: ", fila[3])
-            print("Estado de presencia: ", fila[4])
+            print("Fecha: ", fila[3] if len(fila) > 3 else "No disponible")
+            print("Estado de presencia: ", fila[4] if len(fila) > 4 else "No disponible")
+
+            cambios_realizados = False
 
             while True:
                 nuevo_apellido = input("Ingrese un nuevo apellido (o deje vacío para no modificar): ").strip()
@@ -179,6 +245,7 @@ def modificar_alumno():
                     break
                 elif letras_validas(nuevo_apellido):
                     fila[1] = nuevo_apellido.capitalize()
+                    cambios_realizados = True
                     break
                 else:
                     print("Solo puede ingresar letras o no modificar")
@@ -189,39 +256,96 @@ def modificar_alumno():
                     break
                 elif letras_validas(nuevo_nombre):
                     fila[2] = nuevo_nombre.capitalize()
+                    cambios_realizados = True
                     break
                 else:
-                    print("Solo puede ingresar letras o no modifcar")
+                    print("Solo puede ingresar letras o no modificar")
 
-            print("Estado de presencia (no modificable)", fila[4])
+            print("Estado de presencia (no modificable)", fila[4] if len(fila) > 4 else "No disponible")
             
-            print("\n¡Alumno modificado con éxito!")
-            exportar_alumnos_a_json()
+            if cambios_realizados:
+                print("\n¡Alumno modificado con éxito!")
+                if guardar_alumnos_a_json():
+                    print("Cambios guardados en JSON.")
+                else:
+                    print("Error: Los cambios no se pudieron guardar.")
+            else:
+                print("\nNo se realizaron cambios.")
             return
 
-    print("No se encontró un alumno con ese legajo.")
+    print(f"No se encontró un alumno con el legajo {legajo_buscado}.")
+    print("Use la opción 'Listar alumnos' para ver los legajos disponibles.")
 
 def eliminar_alumno():
-    while True:
-        try:
-            legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
-            break
-        except ValueError:
-            print("Debe ingresar un número entero.")
+    # Validar matriz antes de operar
+    if not validar_matriz():
+        print("Error: La matriz contiene datos inválidos.")
+    
+    if not matriznx5:
+        print("No hay alumnos para eliminar.")
+        return
+    
+    try:
+        legajo_buscado = int(input("Ingrese el número de legajo del alumno a eliminar: "))
+        if legajo_buscado <= 0:
+            print("El legajo debe ser un número positivo.")
+            return
+    except ValueError:
+        print("Debe ingresar un número entero válido.")
+        return
 
-    for i in range(len(matriznx5)):
-        if matriznx5[i][0] == legajo_buscado:
-            print(f"\nAlumno encontrado: {matriznx5[i][1]} {matriznx5[i][2]}")
+    alumno_encontrado = None
+    for i in range(len(matriznx5)-1, -1, -1):  # Recorre al revés
+        if len(matriznx5[i]) >= 1 and matriznx5[i][0] == legajo_buscado:
+            alumno_encontrado = matriznx5[i]
+            print(f"\nAlumno encontrado: {matriznx5[i][1]} {matriznx5[i][2]} (Legajo: {matriznx5[i][0]})")
             confirmacion = input("¿Está seguro que desea eliminar este alumno? (s/n): ").strip().lower()
-            if confirmacion == "s":
+            if confirmacion in ['s', 'si', 'sí', 'y', 'yes']:
                 del matriznx5[i]
                 print("Alumno eliminado con éxito.")
+                if guardar_alumnos_a_json():
+                    print("Cambios guardados en JSON.")
+                else:
+                    print("Error: Los cambios no se pudieron guardar.")
             else:
                 print("Operación cancelada. El alumno no fue eliminado.")
             return
 
-    print("No se encontró un alumno con ese legajo.")
+    if not alumno_encontrado:
+        print(f"No se encontró un alumno con el legajo {legajo_buscado}.")
+        print("Use la opción 'Listar alumnos' para ver los legajos disponibles.")
 
+def guardar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
+    """Guarda solo los alumnos de la matriz actual en JSON, sin sincronizar"""
+    try:
+        # Validar matriz antes de guardar
+        if not validar_matriz():
+            print("Advertencia: La matriz contiene datos inválidos.")
+        
+        alumnos_dict = {}
+        for fila in matriznx5:
+            if len(fila) >= 3 and fila[0] is not None:  # Solo filas válidas
+                legajo = str(fila[0])
+                alumnos_dict[legajo] = {
+                    "apellido": fila[1] if fila[1] else "",
+                    "nombre": fila[2] if fila[2] else ""
+                }
+        
+        # Crear backup antes de guardar
+        try:
+            import shutil
+            shutil.copy2(nombre_archivo, nombre_archivo + ".backup")
+        except:
+            pass  # Si no existe el archivo, no hay problema
+        
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+            json.dump(alumnos_dict, archivo, ensure_ascii=False, indent=4)
+        print("Alumnos guardados en JSON correctamente.")
+        return True
+    except Exception as error:
+        print(f"Error crítico al guardar alumnos: {error}")
+        print("Los cambios no se guardaron. Verifique el espacio en disco y permisos.")
+        return False
 
 #serializacion a JSON
 def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
@@ -380,4 +504,26 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
 
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
             json.dump(alumnos, archivo, ensure_ascii=False, indent=4)
+            
+
+def inicializar_alumnos():
+    """Inicializa y valida la matriz de alumnos al cargar el módulo"""
+    
+    # Validar matriz inicial
+    if not validar_matriz():
+        print("Advertencia: La matriz de alumnos contiene datos inválidos.")
+    
+    # Verificar que no haya legajos duplicados
+    legajos = []
+    for fila in matriznx5:
+        if len(fila) >= 1 and fila[0] is not None:
+            if fila[0] in legajos:
+                print(f"Advertencia: Legajo duplicado encontrado: {fila[0]}")
+            else:
+                legajos.append(fila[0])
+    
+    print(f"Matriz de alumnos cargada con {len(matriznx5)} alumnos.")
+
+# Inicializar al cargar el módulo
+inicializar_alumnos()
             
