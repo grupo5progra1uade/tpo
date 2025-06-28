@@ -19,9 +19,9 @@ def cargar_profesores():
 def profesores_default():
     """Retorna el diccionario de profesores por defecto"""
     return {
-        "1": {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123" ,"seguridad": "Pepita","materia": "Matematica"},
-        "2": {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123","seguridad": "pepitas", "materia": "Historia"},
-        "3": {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123","seguridad": "pepita", "materia": "Literatura"}
+        "1": {"nombre": "Maria", "apellido": "Gonzalez", "email": "maria@gmail.com", "contraseña": "Contra123", "materia": "Matematica"},
+        "2": {"nombre": "Juan",  "apellido": "Perez", "email": "juan@gmail.com", "contraseña": "Contra123", "materia": "Historia"},
+        "3": {"nombre": "Luis", "apellido": "Ramirez", "email": "luis@gmail.com", "contraseña": "Contra123", "materia": "Literatura"}
     }
 
 def guardar_profesores(profesores):
@@ -83,29 +83,33 @@ def cambiar_contraseña():
                 break
 
         if profesor:
-            intentos_seguridad = 0
-            while intentos_seguridad < max_intentos:
-                clave = input("Ingrese su palabra de seguridad: ").strip()
-                if profesor.get("seguridad") == clave:
-                    contraseña = input("Ingrese su nueva contraseña: ")
+            intentos_contraseña = 0
+            while intentos_contraseña < max_intentos:
+                contraseña_actual = input("Ingrese su contraseña actual: ")
+                if profesor["contraseña"] == contraseña_actual:
+                    nueva_contraseña = input("Ingrese su nueva contraseña: ")
                     conf_contraseña = input("Confirme su nueva contraseña: ")
-                    if contraseña == conf_contraseña:
-                        profesor["contraseña"] = contraseña
-                        # Guardar cambios en JSON
-                        if guardar_profesores(profesores):
-                            print("Contraseña cambiada con éxito.")
-                            return True
+                    if nueva_contraseña == conf_contraseña:
+                        if validar_psw(nueva_contraseña):
+                            profesor["contraseña"] = nueva_contraseña
+                            # Guardar cambios en JSON
+                            if guardar_profesores(profesores):
+                                print("Contraseña cambiada con éxito.")
+                                return True
+                            else:
+                                print("Error al guardar los cambios. La contraseña no fue modificada.")
+                                return False
                         else:
-                            print("Error al guardar los cambios. La contraseña no fue modificada.")
+                            print("La nueva contraseña no cumple con los requisitos de seguridad.")
                             return False
                     else:
                         print("Las contraseñas no coinciden. Intente nuevamente.")
                         return False
                 else:
-                    intentos_seguridad += 1
-                    print(f"Respuesta de seguridad incorrecta. Intento {intentos_seguridad} de {max_intentos}.\n")
+                    intentos_contraseña += 1
+                    print(f"Contraseña incorrecta. Intento {intentos_contraseña} de {max_intentos}.\n")
 
-            print("Demasiados intentos fallidos con la respuesta de seguridad.")
+            print("Demasiados intentos fallidos con la contraseña.")
             return False
         else:
             intentos_email += 1
@@ -114,20 +118,14 @@ def cambiar_contraseña():
     print("Demasiados intentos fallidos con el email.")
     return False
 
-def pedir_palabra_segura(dic_profes):
-    clave = input("Ingrese la palabra de seguridad que utilizará: ").strip()
-    if not clave.isalpha():
-        print("Error: La palabra de seguridad debe contener solo letras.")
-        return pedir_palabra_segura(dic_profes)
-    elif clave in dic_profes.keys():
-        print("Esa palabra clave ya está en uso. Intente otra.")
-        return pedir_palabra_segura(dic_profes)
-    
-    return clave
-
 def agregar_profesor(dic_profes):
     
-    clave = pedir_palabra_segura(dic_profes)
+    # Obtener siguiente ID disponible
+    if dic_profes:
+        max_id = max(int(i) for i in dic_profes.keys())
+        nuevo_id = str(max_id + 1)
+    else:
+        nuevo_id = "1"
 
     while True:
         nombre = input("Ingrese el nombre del profesor: ").strip()
@@ -176,43 +174,40 @@ def agregar_profesor(dic_profes):
             print("Nombre de materia inválido. Ingrese solo letras.")
 
     # Agregamos los datos al diccionario
-    dic_profes[clave] = {
+    dic_profes[nuevo_id] = {
         "nombre": nombre,
         "apellido": apellido,
         "email": email,
         "contraseña": contra,
-        "seguridad": clave,
         "materia": asignatura
     }
     
     # Guardar cambios en JSON
     if guardar_profesores(dic_profes):
-        print("\n¡Profesor agregado con éxito!")
+        print(f"\n¡Profesor agregado con éxito! ID asignado: {nuevo_id}")
         return True
     else:
         print("Error al guardar los cambios. El profesor no fue agregado.")
         # Eliminar profesor en caso de error
-        dic_profes.pop(clave, None)
+        dic_profes.pop(nuevo_id, None)
         return False
 
-def modificar_profesor(dic, clave):
+def modificar_profesor(dic, id_profesor):
     profesor_encontrado = None
 
-    for datos in dic.values():
-        if datos.get("seguridad") == clave:
-            profesor_encontrado = datos
-            break
-
-    if profesor_encontrado is None:
-        print("No se encontró un profesor con esa palabra clave.")
+    if id_profesor in dic:
+        profesor_encontrado = dic[id_profesor]
+    else:
+        print(f"No se encontró un profesor con el ID {id_profesor}.")
         return False
 
     print("\nProfesor encontrado:")
-    print("Nombre: ", datos["nombre"])
-    print("Apellido: ", datos["apellido"])
-    print("Email: ", datos["email"])
-    print("Contraseña: ", datos["contraseña"])
-    print("Materia: ", datos["materia"])
+    print("ID: ", id_profesor)
+    print("Nombre: ", profesor_encontrado["nombre"])
+    print("Apellido: ", profesor_encontrado["apellido"])
+    print("Email: ", profesor_encontrado["email"])
+    print("Contraseña: ", profesor_encontrado["contraseña"])
+    print("Materia: ", profesor_encontrado["materia"])
 
     while True:
         nuevo_apellido = input("Ingrese nuevo apellido (deje vacío para no modificar): ").strip()

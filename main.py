@@ -35,8 +35,8 @@ def pre_menu():
             
         elif opcion == "3":
             print("\n--- MODIFICAR DATOS DE PROFESOR ---")
-            palabra_clave = input("Ingrese la palabra clave para modificar: ").strip()
-            modificar_profesor(profesores, palabra_clave)
+            id_profesor = input("Ingrese el ID del profesor a modificar: ").strip()
+            modificar_profesor(profesores, id_profesor)
 
         elif opcion == "4":
             print("\n--- LISTADO DE PROFESORES ---")
