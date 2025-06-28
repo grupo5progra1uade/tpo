@@ -1,68 +1,46 @@
 {
     "1001": {
         "apellido": "López",
-        "nombre": "Ana",
-        "fecha": "2024-08-15",
-        "estado": null
+        "nombre": "Ana"
     },
     "1002": {
         "apellido": "Martínez",
-        "nombre": "Bruno",
-        "fecha": "2024-08-16",
-        "estado": null
+        "nombre": "Bruno"
     },
     "1003": {
         "apellido": "Ramírez",
-        "nombre": "Clara",
-        "fecha": "2024-08-17",
-        "estado": null
+        "nombre": "Clara"
     },
     "1004": {
         "apellido": "Suárez",
-        "nombre": "Diego",
-        "fecha": "2024-08-18",
-        "estado": null
+        "nombre": "Diego"
     },
     "1005": {
         "apellido": "Fernández",
-        "nombre": "Elena",
-        "fecha": "2024-08-19",
-        "estado": null
+        "nombre": "Elena"
     },
     "1006": {
         "apellido": "Gómez",
-        "nombre": "Francisco",
-        "fecha": "2024-08-20",
-        "estado": null
+        "nombre": "Francisco"
     },
     "1007": {
         "apellido": "Pérez",
-        "nombre": "Gabriela",
-        "fecha": "2024-08-21",
-        "estado": null
+        "nombre": "Gabriela"
     },
     "1008": {
         "apellido": "Sánchez",
-        "nombre": "Hugo",
-        "fecha": "2024-08-22",
-        "estado": null
+        "nombre": "Hugo"
     },
     "1009": {
         "apellido": "Torres",
-        "nombre": "Isabel",
-        "fecha": "2024-08-23",
-        "estado": null
-    },
-    "1011": {
-        "apellido": "Fernandes",
-        "nombre": "Bruno",
-        "fecha": "2025-06-23",
-        "estado": null
+        "nombre": "Isabel"
     },
     "1010": {
         "apellido": "Vega",
-        "nombre": "Julián",
-        "fecha": "2024-08-24",
-        "estado": null
+        "nombre": "Julián"
+    },
+    "1011": {
+        "apellido": "Hola",
+        "nombre": "Hola"
     }
 }

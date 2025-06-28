@@ -24,7 +24,7 @@ alumnos_precargados = get_alumnos()
 # Precargamos asistencia para cada materia usando el estado del alumno
 for materia in materias:
     asistencias_por_materia[materia] = [
-        [alumno[0], alumno[4]] for alumno in alumnos_precargados
+        [alumno[0], 0] for alumno in alumnos_precargados  # Inicializa el estado en 0 (ausente) o el valor que corresponda
     ]
 
 

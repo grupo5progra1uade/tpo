@@ -5,7 +5,6 @@ asistencias = []
 
 
 def registrar_asistencia(alumnos, registro, materias_tuple):
-    
     fecha = datetime.today().strftime("%Y-%m-%d")
     
     print("\nSeleccionar materia:")
@@ -16,7 +15,7 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
     while opcion is None:
         entrada = input("Opción: ").strip()
 
-        #Validar que la entrada tenga solo caracteres entre '0' y '9'
+        # Validar que la entrada tenga solo caracteres entre '0' y '9'
         valido = True
         if len(entrada) == 0:
             valido = False
@@ -27,7 +26,7 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
                     break
 
         if valido:
-            #Convertir a numero
+            # Convertir a numero
             num = int(entrada) 
 
             if num >= 1 and num <= len(materias_tuple):
@@ -38,31 +37,39 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
             print("Entrada inválida, debe ser un número entero positivo.")
 
     materia = materias_tuple[opcion - 1]
+    asistencias_dia = []
 
-    for alumno in alumnos:
-        print(f"Alumno: {alumno[2]} {alumno[1]}")
-        
-        while True:
-            estado = input("¿Presente (1), Media falta (-1), Ausente (0)?: ").strip()
-            if estado == "1":
-                asistencias.append(1)
-                break
-            elif estado == "-1":
-                asistencias.append(-1)
-                break
-            elif estado == "0":
-                asistencias.append(0)
-                break
-            else:
-                print("Entrada inválida. Ingrese 1, -1 o 0.")
-    
+    with open("asistencias.txt", "a", encoding="utf-8") as archivo:
+        for alumno in alumnos:
+            print(f"Alumno: {alumno[2]} {alumno[1]}")
+            
+            while True:
+                estado = input("¿Presente (1), Media falta (-1), Ausente (0)?: ").strip()
+                if estado == "1":
+                    asistencias_dia.append(1)
+                    estado_txt = "Presente"
+                    break
+                elif estado == "-1":
+                    asistencias_dia.append(-1)
+                    estado_txt = "Media falta"
+                    break
+                elif estado == "0":
+                    asistencias_dia.append(0)
+                    estado_txt = "Ausente"
+                    break
+                else:
+                    print("Entrada inválida. Ingrese 1, -1 o 0.")
+            # escribir en el archivo la asistencia del alumno
+            archivo.write(f"{fecha},{materia},{alumno[0]},{alumno[2]} {alumno[1]},{estado_txt}\n")
+        # salto de línea solo al finalizar la asistencia de todos los alumnos
+        archivo.write("\n")
+
     registro.append({
-    "fecha": fecha,
-    "materia": materia,
-    "asistencias": asistencias
+        "fecha": fecha,
+        "materia": materia,
+        "asistencias": asistencias_dia
     })
-    print("Asistencia registrada correctamente.")
-
+    print("Asistencia registrada correctamente y guardada en asistencias.txt.")
 
 def mostrar_asistencia_alumno(registro, matriznx5):
     while True:

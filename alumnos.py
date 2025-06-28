@@ -8,16 +8,16 @@ matriznx5 = []
 
 # Precarga de alumnos
 matriznx5.extend([
-    [1001, "López",    "Ana",    "2024-08-15", None],  
-    [1002, "Martínez", "Bruno",  "2024-08-16", None],  
-    [1003, "Ramírez",  "Clara",  "2024-08-17", None],  
-    [1004, "Suárez",   "Diego",  "2024-08-18", None],  #None para que no haya
-    [1005, "Fernández","Elena",  "2024-08-19", None],
-    [1006, "Gómez",    "Francisco", "2024-08-20", None],
-    [1007, "Pérez",    "Gabriela",  "2024-08-21", None],
-    [1008, "Sánchez",  "Hugo",      "2024-08-22", None],
-    [1009, "Torres",   "Isabel",    "2024-08-23", None],
-    [1010, "Vega",     "Julián",    "2024-08-24", None],
+    [1001, "López", "Ana"],
+    [1002, "Martínez", "Bruno"],
+    [1003, "Ramírez", "Clara"],
+    [1004, "Suárez", "Diego"],
+    [1005, "Fernández", "Elena"],
+    [1006, "Gómez", "Francisco"],
+    [1007, "Pérez", "Gabriela"],
+    [1008, "Sánchez", "Hugo"],
+    [1009, "Torres", "Isabel"],
+    [1010, "Vega", "Julián"],
 ])
 
 def cargar_datos():
@@ -222,16 +222,6 @@ def eliminar_alumno():
 
     print("No se encontró un alumno con ese legajo.")
 
-def exportar_alumnos_a_txt(nombre_archivo="alumnos_lista.txt"):
-    try:
-        with open(nombre_archivo, "w", encoding="utf-8") as archivo:
-            archivo.write("Legajo,Apellido,Nombre,Fecha,Presente\n")
-            for fila in matriznx5:
-                presente = fila[4] if fila[4] is not None else "Sin registro"
-                archivo.write(f"{fila[0]},{fila[1]},{fila[2]},{fila[3]},{presente}\n")
-        print(f"Archivo de texto generado correctamente.")
-    except Exception as error:
-        print(f"Error al generar el archivo: {error}")
 
 #serializacion a JSON
 def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
@@ -250,9 +240,7 @@ def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
                 matriznx5.append([
                     int(legajo),
                     datos["apellido"],
-                    datos["nombre"],
-                    datos["fecha"],
-                    datos["estado"]
+                    datos["nombre"]
                 ])
 
         # 2. Actualizar o agregar los alumnos de la matriz al JSON
@@ -260,9 +248,7 @@ def exportar_alumnos_a_json(nombre_archivo="alumnos_lista.json"):
             legajo = str(fila[0])
             alumnos_existentes[legajo] = {
                 "apellido": fila[1],
-                "nombre":   fila[2],
-                "fecha":    fila[3],
-                "estado":   fila[4]
+                "nombre":   fila[2]
             }
 
         # 3. Guardar el resultado actualizado
@@ -291,11 +277,11 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             alumnos = {}
 
         if opcion == "1":
-            print("  Legajo  |    Apellido   |    Nombre     |     Estado     ")            
-            print("-" * 50)
+            print("  Legajo  |    Apellido   |    Nombre     ")            
+            print("-" * 40)
             for legajo in alumnos:
                 datos = alumnos[legajo]
-                print(f"{legajo:<9} | {datos['apellido']:<13} | {datos['nombre']:<13} | {datos['estado']}")
+                print(f"{legajo:<9} | {datos['apellido']:<13} | {datos['nombre']:<13}")
             input("Presione Enter para continuar...")
 
         elif opcion == "2":
@@ -327,17 +313,13 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
                 else:
                     print("El nombre es inválido, debe ingresar solo letras y espacios")
                     
-            fecha = datetime.today().strftime("%Y-%m-%d")
-            estado = None  # Estado inicial es None
-            
+            # No guardar fecha ni estado
             alumnos[str(legajo)] = {
                 "apellido": apellido,
-                "nombre": nombre,
-                "fecha": fecha,
-                "estado": estado
+                "nombre": nombre
             }
             if not any(fila[0] == legajo for fila in matriznx5): #evita creacion de legajos duplicados x error
-                matriznx5.append([legajo, apellido, nombre, fecha, estado])
+                matriznx5.append([legajo, apellido, nombre, None, None])
             else:
                 print("Advertencia: el alumno ya existía, por ello, no se duplicó.")
                 
@@ -397,5 +379,5 @@ def crud_alumnos_json(nombre_archivo="alumnos_lista.json"):
             print("Opción inválida.")
 
         with open(nombre_archivo, "w", encoding="utf-8") as archivo:
-            json.dump(alumnos, archivo)
+            json.dump(alumnos, archivo, ensure_ascii=False, indent=4)
             
