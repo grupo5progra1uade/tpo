@@ -56,25 +56,32 @@ def mostrar_asistencias_por_materia():
             print(f"{legajo:<6} | {nombre:<20} | {estado_str}")
 
 
-
 def agregar_materia(lista_materias):
     while True:
         try:
-            nueva = input("Nombre de la nueva materia: ").capitalize()
-    
-            for palabra in nueva.split(): #separa el string para escribir materias de dos palabras
+            nueva = input("Nombre de la nueva materia: ").strip().capitalize()
+
+            # Validar si está vacía
+            if not nueva:
+                print("La materia no puede estar vacía.")
+                continue
+
+            # Validar que todas las palabras sean letras
+            for palabra in nueva.split():
                 if not palabra.isalpha():
-                    raise ValueError("La materia debe contener solo letras y espacios")
-    
-            if nueva not in lista_materias:
+                    raise ValueError("La materia debe contener solo letras y espacios.")
+
+            # Verificar si ya existe
+            if nueva in lista_materias:
+                print("¡Ya existe!")
+            else:
                 lista_materias.append(nueva)
                 asistencias_por_materia[nueva] = []
-                print("Materia agregada!")
-            else:
-                print("Ya existe!")
+                print("¡Materia agregada!")
             return lista_materias
+
         except ValueError as error:
-            print(f"Error: {error}. Vuelva a ingresar la materia")
+            print(f"Error: {error}. Vuelva a ingresar la materia.")
 
 def borrar_materia(lista_materias):
     materia_a_borrar = input("Nombre de la materia a borrar: ").strip().capitalize()
