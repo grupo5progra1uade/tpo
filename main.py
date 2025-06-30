@@ -4,6 +4,12 @@ from alumnos import *
 from utils import mostrar_menu
 from profesores import *
 
+#cargar alumnos desde el JSON y armar matriznx5
+with open("alumnos_lista.json", encoding="utf-8") as a:
+    alumnos_dict = json.load(a)
+matriznx5 = []
+for legajo, datos in alumnos_dict.items():
+    matriznx5.append([int(legajo), datos["apellido"], datos["nombre"]])
 
 def pre_menu():
     while True:

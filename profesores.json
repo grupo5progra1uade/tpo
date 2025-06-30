@@ -2,8 +2,8 @@
     "1": {
         "nombre": "Maria",
         "apellido": "Gonzalez",
-        "email": "maria@gmail.com",
-        "contraseña": "Contra123",
+        "email": "maria123@gmail.com",
+        "contraseña": "Maria12345.",
         "materia": "Matematica"
     },
     "2": {
@@ -15,7 +15,7 @@
     },
     "3": {
         "nombre": "Luis",
-        "apellido": "Ramirez",
+        "apellido": "Martinez",
         "email": "luis@gmail.com",
         "contraseña": "Contra123",
         "materia": "Literatura"
@@ -26,5 +26,12 @@
         "email": "t@gmail.com",
         "contraseña": "test12345",
         "materia": "T"
+    },
+    "5": {
+        "nombre": "Roberto",
+        "apellido": "Jones",
+        "email": "roberto@gmail.com",
+        "contraseña": "Hola1234.",
+        "materia": "Química"
     }
 }

@@ -10,3 +10,14 @@
 2025-06-27,Matematica,1010,Julián Vega,Media falta
 2025-06-27,Matematica,1011,Hola Hola,Presente
 
+2025-06-29,Matematica,1001,Ana López,Presente
+2025-06-29,Matematica,1002,Bruno Martínez,Presente
+2025-06-29,Matematica,1003,Clara Ramírez,Presente
+2025-06-29,Matematica,1004,Diego Suárez,Presente
+2025-06-29,Matematica,1005,Elena Fernández,Presente
+2025-06-29,Matematica,1006,Francisco Gómez,Presente
+2025-06-29,Matematica,1007,Gabriela Pérez,Presente
+2025-06-29,Matematica,1008,Hugo Sánchez,Presente
+2025-06-29,Matematica,1009,Isabel Torres,Presente
+2025-06-29,Matematica,1010,Julián Vega,Ausente
+
