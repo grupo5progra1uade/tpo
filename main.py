@@ -18,8 +18,8 @@ def pre_menu():
         print("="*60)
         print("\nMENÚ DE PROFESORES")
         print("-"*60)
-        print("En este menú puede gestionar el acceso y los datos de los profesores.")
-        print("Seleccione una opción para continuar:")
+        print("En este menú puede gestionar el acceso y los datos de los profesores.\n")
+        print("Seleccione una opción para continuar:\n")
         print("1. Ingresar (acceder al sistema principal)")
         print("2. Cargar nuevo profesor (alta)")
         print("3. Modificar profesor (editar datos)")
@@ -29,7 +29,7 @@ def pre_menu():
         print("7. Salir del sistema")
         print("-"*60)
         
-        opcion = input("Seleccione una opción: ").strip()
+        opcion = input("\nSeleccione una opción: ").strip()
         
         if opcion == "1":
             if ingreso():

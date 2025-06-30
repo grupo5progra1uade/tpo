@@ -113,9 +113,9 @@ def cargar_datos():
 
 def imprimir_matriz():
     alumnos = cargar_alumnos_json()
-    print("Registro de alumnos")
-    print("Legajo |    Apellido        |   Nombre          ")
-    print("-" * 50)
+    print("\nRegistro de alumnos\n")
+    print("Legajo |      Apellido      |    Nombre    ")
+    print("-" * 45)
     for legajo, datos in alumnos.items():
         legajo_str = str(legajo)
         apellido = datos.get("apellido", "")
@@ -124,9 +124,9 @@ def imprimir_matriz():
 
 def imprimir_matriz_ordenada_por_apellido():
     alumnos = cargar_alumnos_json()
-    print("Registro de alumnos (Ordenado por Apellido)")
-    print("  Legajo  |    Apellido   |    Nombre     ")
-    print("-" * 50)
+    print("\nRegistro de alumnos (Ordenado por Apellido)\n")
+    print("  Legajo  |   Apellido    |    Nombre    ")
+    print("-" * 45)
     
     # Ordenar por apellido
     alumnos_ordenados = sorted(alumnos.items(), key=lambda x: x[1]["apellido"].lower())
