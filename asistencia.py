@@ -1,5 +1,6 @@
 from datetime import datetime
 from alumnos import *
+from materias import *
 
 def cargar_registro_desde_txt():
     registro = []
@@ -46,22 +47,24 @@ def procesar_bloque(bloque_lineas):
     return {"fecha": fecha, "materia": materia, "asistencias": asistencias}
 
 
-def registrar_asistencia(alumnos, materias_tuple):
+def registrar_asistencia(alumnos):
+    data = cargar_materias()
+    materias = data["materias"]
     fecha = datetime.today().strftime("%Y-%m-%d")
     
     print("\nSeleccionar materia:")
-    for i in range(len(materias_tuple)):
-        print(f"{i+1}. {materias_tuple[i]}")
+    for i in range(len(materias)):
+        print(f"{i+1}. {materias[i]}")
 
     opcion = None
     while opcion is None:
         entrada = input("Opción: ").strip()
-        if entrada.isdigit() and 1 <= int(entrada) <= len(materias_tuple):
+        if entrada.isdigit() and 1 <= int(entrada) <= len(materias):
             opcion = int(entrada)
         else:
             print("Entrada inválida, intente nuevamente.")
 
-    materia = materias_tuple[opcion - 1]
+    materia = materias[opcion - 1]
     asistencias_dia = []
 
     with open("asistencias.txt", "a", encoding="utf-8") as archivo:

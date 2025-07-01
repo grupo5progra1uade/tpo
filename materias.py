@@ -29,6 +29,7 @@ def cargar_materias():
         guardar_materias(data)
         return data
     
+    
 def guardar_materias(data):
     solo_materias = {
         "materias": data["materias"]
@@ -36,32 +37,6 @@ def guardar_materias(data):
     with open(ARCHIVO_MATERIAS, "w", encoding="utf-8") as archivo:
         json.dump(solo_materias, archivo, indent=4)
 
-# Precarga de materias
-materias = ["Matematica", "Historia", "Programacion"]
-
-
-# Precarga de asistencias relacionadas con los alumnos de alumnos.py
-asistencias_por_materia = {
-    "Matematica": [
-        [1001, 1], [1002, 0], [1003, -1], [1004, 1], [1005, 0]
-    ],
-    "Historia": [
-        [1001, 1], [1002, 1], [1003, 1], [1004, 0], [1005, -1]
-    ],
-    "Programacion": [
-        [1001, -1], [1002, 0], [1003, 1], [1004, 1], [1005, 1]
-    ]
-}
-
-
-# Traemos alumnos precargados
-alumnos_precargados = get_alumnos()
-
-# Precargamos asistencia para cada materia usando el estado del alumno
-for materia in materias:
-    asistencias_por_materia[materia] = [
-        [alumno[0], 0] for alumno in alumnos_precargados  # Inicializa el estado en 0 (ausente) o el valor que corresponda
-    ]
 
 def mostrar_materias():
     data = cargar_materias()
@@ -147,7 +122,7 @@ def registrar_asistencia_en_materia(nombre_materia):
         print("Esa materia no existe.")
         return
 
-    print(f"\nRegistrando asistencia para: {materias}")
+    print(f"\nRegistrando asistencia para: {data["materias"]}")
     print("1 = presente, 0 = ausente, -1 = media falta\n")
 
     registros = []

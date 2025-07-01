@@ -83,9 +83,8 @@ def main():
         if opcion == "1":
             gestion_alumnos()
         elif opcion == "2":
-            cargar_materias()
             registro = cargar_registro_desde_txt()
-            registrar_asistencia(matriznx5, materias)
+            registrar_asistencia(matriznx5)
         elif opcion == "3":
             cargar_materias()
             gestion_materias()
@@ -143,7 +142,7 @@ def gestion_alumnos():
         else:
             input("Opción inválida. Presione Enter para continuar...")
             
-def registrar_asistencia_menu(matriznx5, materias):
+def registrar_asistencia_menu(matriznx5, ARCHIVO_MATERIAS):
     while True:
         mostrar_menu("Registro de Asistencia", [
             "Cargar asistencia",
@@ -154,7 +153,7 @@ def registrar_asistencia_menu(matriznx5, materias):
         
         if opcion == "1":
             cargar_materias()
-            registrar_asistencia(matriznx5, materias)
+            registrar_asistencia(matriznx5, ARCHIVO_MATERIAS)
         elif opcion == "2":
             return
         else:

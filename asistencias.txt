@@ -163,3 +163,15 @@
 2025-07-01,Programacion,1010,Julián Vega,Presente
 2025-07-01,Programacion,1011,Juan Fernando Quintero,Presente
 
+2025-07-01,Quimica,1001,Ana López,Presente
+2025-07-01,Quimica,1002,Bruno Martínez,Presente
+2025-07-01,Quimica,1003,Clara Ramírez,Presente
+2025-07-01,Quimica,1004,Diego Suárez,Presente
+2025-07-01,Quimica,1005,Elena Fernández,Presente
+2025-07-01,Quimica,1006,Francisco Gómez,Presente
+2025-07-01,Quimica,1007,Gabriela Pérez,Presente
+2025-07-01,Quimica,1008,Hugo Sánchez,Presente
+2025-07-01,Quimica,1009,Isabel Torres,Presente
+2025-07-01,Quimica,1010,Julián Vega,Presente
+2025-07-01,Quimica,1011,Juan Fernando Quintero,Presente
+
