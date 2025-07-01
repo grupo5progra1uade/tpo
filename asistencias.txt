@@ -91,3 +91,75 @@
 2025-07-01,Historia,1010,Julián Vega,Presente
 2025-07-01,Historia,1011,Juan Fernando Quintero,Presente
 
+2025-07-01,Matematica,1001,Ana López,Presente
+2025-07-01,Matematica,1002,Bruno Martínez,Presente
+2025-07-01,Matematica,1003,Clara Ramírez,Presente
+2025-07-01,Matematica,1004,Diego Suárez,Presente
+2025-07-01,Matematica,1005,Elena Fernández,Presente
+2025-07-01,Matematica,1006,Francisco Gómez,Presente
+2025-07-01,Matematica,1007,Gabriela Pérez,Presente
+2025-07-01,Matematica,1008,Hugo Sánchez,Presente
+2025-07-01,Matematica,1009,Isabel Torres,Presente
+2025-07-01,Matematica,1010,Julián Vega,Presente
+2025-07-01,Matematica,1011,Juan Fernando Quintero,Presente
+
+2025-07-01,Programacion,1001,Ana López,Presente
+2025-07-01,Programacion,1002,Bruno Martínez,Presente
+2025-07-01,Programacion,1003,Clara Ramírez,Presente
+2025-07-01,Programacion,1004,Diego Suárez,Presente
+2025-07-01,Programacion,1005,Elena Fernández,Presente
+2025-07-01,Programacion,1006,Francisco Gómez,Presente
+2025-07-01,Programacion,1007,Gabriela Pérez,Presente
+2025-07-01,Programacion,1008,Hugo Sánchez,Presente
+2025-07-01,Programacion,1009,Isabel Torres,Presente
+2025-07-01,Programacion,1010,Julián Vega,Presente
+2025-07-01,Programacion,1011,Juan Fernando Quintero,Presente
+
+2025-07-01,Historia,1001,Ana López,Ausente
+2025-07-01,Historia,1002,Bruno Martínez,Ausente
+2025-07-01,Historia,1003,Clara Ramírez,Ausente
+2025-07-01,Historia,1004,Diego Suárez,Ausente
+2025-07-01,Historia,1005,Elena Fernández,Ausente
+2025-07-01,Historia,1006,Francisco Gómez,Ausente
+2025-07-01,Historia,1007,Gabriela Pérez,Ausente
+2025-07-01,Historia,1008,Hugo Sánchez,Ausente
+2025-07-01,Historia,1009,Isabel Torres,Ausente
+2025-07-01,Historia,1010,Julián Vega,Ausente
+2025-07-01,Historia,1011,Juan Fernando Quintero,Ausente
+
+2025-07-01,Matematica,1001,Ana López,Presente
+2025-07-01,Matematica,1002,Bruno Martínez,Presente
+2025-07-01,Matematica,1003,Clara Ramírez,Presente
+2025-07-01,Matematica,1004,Diego Suárez,Presente
+2025-07-01,Matematica,1005,Elena Fernández,Presente
+2025-07-01,Matematica,1006,Francisco Gómez,Presente
+2025-07-01,Matematica,1007,Gabriela Pérez,Presente
+2025-07-01,Matematica,1008,Hugo Sánchez,Presente
+2025-07-01,Matematica,1009,Isabel Torres,Presente
+2025-07-01,Matematica,1010,Julián Vega,Presente
+2025-07-01,Matematica,1011,Juan Fernando Quintero,Presente
+
+2025-07-01,Matematica,1001,Ana López,Presente
+2025-07-01,Matematica,1002,Bruno Martínez,Presente
+2025-07-01,Matematica,1003,Clara Ramírez,Presente
+2025-07-01,Matematica,1004,Diego Suárez,Presente
+2025-07-01,Matematica,1005,Elena Fernández,Presente
+2025-07-01,Matematica,1006,Francisco Gómez,Presente
+2025-07-01,Matematica,1007,Gabriela Pérez,Presente
+2025-07-01,Matematica,1008,Hugo Sánchez,Presente
+2025-07-01,Matematica,1009,Isabel Torres,Presente
+2025-07-01,Matematica,1010,Julián Vega,Presente
+2025-07-01,Matematica,1011,Juan Fernando Quintero,Presente
+
+2025-07-01,Programacion,1001,Ana López,Presente
+2025-07-01,Programacion,1002,Bruno Martínez,Presente
+2025-07-01,Programacion,1003,Clara Ramírez,Presente
+2025-07-01,Programacion,1004,Diego Suárez,Presente
+2025-07-01,Programacion,1005,Elena Fernández,Presente
+2025-07-01,Programacion,1006,Francisco Gómez,Presente
+2025-07-01,Programacion,1007,Gabriela Pérez,Presente
+2025-07-01,Programacion,1008,Hugo Sánchez,Presente
+2025-07-01,Programacion,1009,Isabel Torres,Presente
+2025-07-01,Programacion,1010,Julián Vega,Presente
+2025-07-01,Programacion,1011,Juan Fernando Quintero,Presente
+
