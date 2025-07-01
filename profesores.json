@@ -19,27 +19,13 @@
         "email": "luis@gmail.com",
         "contraseña": "Contra123",
         "materia": "Literatura"
-    },
-    "4": {
-        "nombre": "T",
-        "apellido": "T",
-        "email": "t@gmail.com",
-        "contraseña": "Contra123",
-        "materia": "Teologia"
-    },
+    },    
     "5": {
         "nombre": "Roberto",
         "apellido": "Lopez",
         "email": "roberto@gmail.com",
         "contraseña": "Hola1234.",
         "materia": "Química"
-    },
-    "6": {
-        "nombre": "S",
-        "apellido": "S",
-        "email": "s@s.com",
-        "contraseña": "12345678",
-        "materia": "Teoria"
     },
     "7": {
         "nombre": "Juan Manuel",

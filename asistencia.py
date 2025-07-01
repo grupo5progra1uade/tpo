@@ -120,11 +120,13 @@ def mostrar_asistencia_alumno(matriznx5):
     apellido = matriznx5[indice_alumno][1]
     print(f"Asistencia de {nombre} {apellido}:")
     
+    print(f"{'Materia':<20} {'Fecha':<12} {'Estado':<12}")
+    print("-" * 44)
     for item in registro:
         if indice_alumno < len(item["asistencias"]):
             estado_num = item["asistencias"][indice_alumno]
             texto = "Presente" if estado_num == 1 else "Media falta" if estado_num == -1 else "Ausente"
-            print(f"Materia: {item['materia']} | Fecha: {item['fecha']} - {texto}")
+            print(f"{item['materia']:<20} {item['fecha']:<12} {texto:<12}")
 
 def mostrar_asistencia_general(registro):
     print("\nResumen general de asistencias:")

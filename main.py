@@ -65,6 +65,7 @@ def pre_menu():
 
 
 def main():
+    registro = cargar_registro_desde_txt()
     while True:
         print("\n" + "="*60)
         print("         SISTEMA DE ASISTENCIA - MENÚ PRINCIPAL")

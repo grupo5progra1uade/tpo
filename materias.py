@@ -122,7 +122,7 @@ def registrar_asistencia_en_materia(nombre_materia):
         print("Esa materia no existe.")
         return
 
-    print(f"\nRegistrando asistencia para: {data["materias"]}")
+    print(f"\nRegistrando asistencia para: {data['materias']}")
     print("1 = presente, 0 = ausente, -1 = media falta\n")
 
     registros = []
