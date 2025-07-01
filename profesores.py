@@ -120,7 +120,7 @@ def cambiar_contraseña():
     return False
 
 def agregar_profesor(dic_profes):
-    data= cargar_materias()
+    data = cargar_materias()
     
     # Obtener siguiente ID disponible
     if dic_profes:
@@ -174,6 +174,7 @@ def agregar_profesor(dic_profes):
             # Agregar la materia si no existe
             if asignatura not in data["materias"]:
                 data["materias"].append(asignatura)
+                guardar_materias(data)
                 print(f"Materia '{asignatura}' agregada automáticamente a la lista de materias.")
             break
         else:
@@ -192,6 +193,7 @@ def agregar_profesor(dic_profes):
     
     if materia_profesor not in data["materias"]:
         data["materias"].append(materia_profesor)
+        guardar_materias(data)
         print("La materia fue agregada al sistema con éxito!")
     else:
         print("La materia ya se encuentra en el sistema")
@@ -207,6 +209,7 @@ def agregar_profesor(dic_profes):
         return False
 
 def modificar_profesor(dic, id_profesor):
+    data = cargar_materias()
     profesor_encontrado = None
 
     if id_profesor in dic:
@@ -282,8 +285,9 @@ def modificar_profesor(dic, id_profesor):
 
     materia_profesor = profesor_encontrado["materia"]
     
-    if materia_profesor not in materias:
-        materias.append(materia_profesor)
+    if materia_profesor not in data["materias"]:
+        data["materias"].append(materia_profesor)
+        guardar_materias(data)
         print("La materia fue agregada al sistema con éxito!")
     else:
         print("La materia ya se encuentra en el sistema")

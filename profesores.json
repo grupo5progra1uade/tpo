@@ -40,5 +40,19 @@
         "email": "s@s.com",
         "contraseña": "12345678",
         "materia": "Teoria"
+    },
+    "7": {
+        "nombre": "Juan Manuel",
+        "apellido": "Fangio",
+        "email": "jmfangio@gmail.com",
+        "contraseña": "Contra123",
+        "materia": "Calculo"
+    },
+    "8": {
+        "nombre": "J",
+        "apellido": "M",
+        "email": "jm@gmail.com",
+        "contraseña": "Contra123",
+        "materia": "Algebra"
     }
 }
