@@ -33,5 +33,12 @@
         "email": "roberto@gmail.com",
         "contraseña": "Hola1234.",
         "materia": "Química"
+    },
+    "6": {
+        "nombre": "G",
+        "apellido": "D",
+        "email": "a@a.com",
+        "contraseña": "giuliana16",
+        "materia": "Natacion"
     }
 }

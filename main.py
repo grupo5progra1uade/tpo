@@ -1,6 +1,7 @@
 from materias import *
 from asistencia import *
 from alumnos import * 
+from materias import agregar_materia
 from utils import mostrar_menu
 from profesores import *
 

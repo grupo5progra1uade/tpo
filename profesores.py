@@ -1,6 +1,7 @@
 import pwinput
 import json
 from validaciones import *
+from materias import materias, agregar_materia
 
 # Archivo JSON para almacenar profesores
 ARCHIVO_PROFESORES = "profesores.json"
@@ -169,6 +170,10 @@ def agregar_profesor(dic_profes):
             print("La materia no puede quedar vacía.")
         elif letras_validas(asignatura):
             asignatura = capitalizar(asignatura)
+            # Agregar la materia si no existe
+            if asignatura not in materias:
+                materias.append(asignatura)
+                print(f"Materia '{asignatura}' agregada automáticamente a la lista de materias.")
             break
         else:
             print("Nombre de materia inválido. Ingrese solo letras.")
