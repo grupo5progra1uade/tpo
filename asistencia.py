@@ -1,10 +1,52 @@
 from datetime import datetime
 from alumnos import *
-registro = []
-asistencias = []
+
+def cargar_registro_desde_txt():
+    registro = []
+    bloque = []
+
+    try:
+        with open("asistencias.txt", "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                linea = linea.strip()
+                if linea == "":
+                    if bloque:
+                        registro.append(procesar_bloque(bloque))
+                        bloque = []
+                else:
+                    bloque.append(linea)
+            if bloque:  # último bloque sin salto al final
+                registro.append(procesar_bloque(bloque))
+    except FileNotFoundError:
+        print("No se encontró el archivo 'asistencias.txt'... se creará al registrar asistencia.")
+    
+    return registro
 
 
-def registrar_asistencia(alumnos, registro, materias_tuple):
+def procesar_bloque(bloque_lineas):
+    asistencias = []
+    fecha = ""
+    materia = ""
+
+    for linea in bloque_lineas:
+        partes = linea.split(",")  # fecha,materia,legajo,nombre apellido,estado
+        if len(partes) < 5:
+            continue
+        fecha = partes[0].strip()
+        materia = partes[1].strip()
+        estado = partes[4].strip()
+
+        if estado == "Presente":
+            asistencias.append(1)
+        elif estado == "Media falta":
+            asistencias.append(-1)
+        else:
+            asistencias.append(0)
+
+    return {"fecha": fecha, "materia": materia, "asistencias": asistencias}
+
+
+def registrar_asistencia(alumnos, materias_tuple):
     fecha = datetime.today().strftime("%Y-%m-%d")
     
     print("\nSeleccionar materia:")
@@ -14,27 +56,10 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
     opcion = None
     while opcion is None:
         entrada = input("Opción: ").strip()
-
-        # Validar que la entrada tenga solo caracteres entre '0' y '9'
-        valido = True
-        if len(entrada) == 0:
-            valido = False
+        if entrada.isdigit() and 1 <= int(entrada) <= len(materias_tuple):
+            opcion = int(entrada)
         else:
-            for c in entrada:
-                if c < '0' or c > '9':
-                    valido = False
-                    break
-
-        if valido:
-            # Convertir a numero
-            num = int(entrada) 
-
-            if num >= 1 and num <= len(materias_tuple):
-                opcion = num
-            else:
-                print("Número fuera de rango, intente nuevamente.")
-        else:
-            print("Entrada inválida, debe ser un número entero positivo.")
+            print("Entrada inválida, intente nuevamente.")
 
     materia = materias_tuple[opcion - 1]
     asistencias_dia = []
@@ -42,7 +67,6 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
     with open("asistencias.txt", "a", encoding="utf-8") as archivo:
         for alumno in alumnos:
             print(f"Alumno: {alumno[2]} {alumno[1]}")
-            
             while True:
                 estado = input("¿Presente (1), Media falta (-1), Ausente (0)?: ").strip()
                 if estado == "1":
@@ -64,14 +88,12 @@ def registrar_asistencia(alumnos, registro, materias_tuple):
         # salto de línea solo al finalizar la asistencia de todos los alumnos
         archivo.write("\n")
 
-    registro.append({
-        "fecha": fecha,
-        "materia": materia,
-        "asistencias": asistencias_dia
-    })
     print("Asistencia registrada correctamente y guardada en asistencias.txt.")
+    return cargar_registro_desde_txt
 
-def mostrar_asistencia_alumno(registro, matriznx5):
+def mostrar_asistencia_alumno(matriznx5):
+    registro = cargar_registro_desde_txt()
+    
     while True:
         try:
             legajo = int(input("Ingrese legajo del alumno: "))
@@ -82,8 +104,8 @@ def mostrar_asistencia_alumno(registro, matriznx5):
     indice_alumno = None
     
     #busca indice del alumno
-    for i in range(len(matriznx5)):
-        if matriznx5[i][0] == legajo:
+    for i, fila in enumerate(matriznx5):
+        if fila[0] == legajo:
             indice_alumno = i
             break
 
@@ -91,17 +113,14 @@ def mostrar_asistencia_alumno(registro, matriznx5):
         print("No se encontró un alumno con ese legajo.")
         return
 
-    print(f"Asistencia de {matriznx5[indice_alumno][2]} {matriznx5[indice_alumno][1]}:")
+    nombre = matriznx5[indice_alumno][2]
+    apellido = matriznx5[indice_alumno][1]
+    print(f"Asistencia de {nombre} {apellido}:")
     
     for item in registro:
-        if len(item['asistencias']) > indice_alumno:
-            estado = item['asistencias'][indice_alumno]
-            if estado == 1:
-                texto = "Presente"
-            elif estado == -1:
-                texto = "Media falta"
-            else:
-                texto = "Ausente"
+        if indice_alumno < len(item["asistencias"]):
+            estado_num = item["asistencias"][indice_alumno]
+            texto = "Presente" if estado_num == 1 else "Media falta" if estado_num == -1 else "Ausente"
             print(f"Materia: {item['materia']} | Fecha: {item['fecha']} - {texto}")
 
 def mostrar_asistencia_general(registro):
