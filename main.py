@@ -153,6 +153,7 @@ def registrar_asistencia_menu(matriznx5, materias):
         opcion = input("Opcion: ").strip()
         
         if opcion == "1":
+            cargar_materias()
             registrar_asistencia(matriznx5, materias)
         elif opcion == "2":
             return
@@ -171,10 +172,13 @@ def gestion_materias():
         opcion = input("Opción: ").strip()
         
         if opcion == "1":
+            cargar_materias()
             mostrar_materias()
         elif opcion == "2":
+            cargar_materias()
             agregar_materia()
         elif opcion == "3":
+            cargar_materias()
             borrar_materia()
         elif opcion == "4":
             return
