@@ -11,7 +11,7 @@
         "apellido": "Perez",
         "email": "juan@gmail.com",
         "contraseña": "Contra123",
-        "materia": "Historia"
+        "materia": "Arte"
     },
     "3": {
         "nombre": "Luis",
@@ -24,21 +24,14 @@
         "nombre": "T",
         "apellido": "T",
         "email": "t@gmail.com",
-        "contraseña": "test12345",
-        "materia": "T"
+        "contraseña": "Contra123",
+        "materia": "Teologia"
     },
     "5": {
         "nombre": "Roberto",
-        "apellido": "Jones",
+        "apellido": "Lopez",
         "email": "roberto@gmail.com",
         "contraseña": "Hola1234.",
         "materia": "Química"
-    },
-    "6": {
-        "nombre": "G",
-        "apellido": "D",
-        "email": "a@a.com",
-        "contraseña": "giuliana16",
-        "materia": "Natacion"
     }
 }

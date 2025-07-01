@@ -1,7 +1,7 @@
 import pwinput
 import json
 from validaciones import *
-from materias import materias, agregar_materia
+from materias import * 
 
 # Archivo JSON para almacenar profesores
 ARCHIVO_PROFESORES = "profesores.json"
@@ -187,6 +187,14 @@ def agregar_profesor(dic_profes):
         "materia": asignatura
     }
     
+    materia_profesor = dic_profes[nuevo_id]["materia"]
+    
+    if materia_profesor not in materias:
+        materias.append(materia_profesor)
+        print("La materia fue agregada al sistema con éxito!")
+    else:
+        print("La materia ya se encuentra en el sistema")
+    
     # Guardar cambios en JSON
     if guardar_profesores(dic_profes):
         print(f"\n¡Profesor agregado con éxito! ID asignado: {nuevo_id}")
@@ -271,6 +279,14 @@ def modificar_profesor(dic, id_profesor):
     if nueva_materia:
         profesor_encontrado["materia"] = nueva_materia
 
+    materia_profesor = profesor_encontrado["materia"]
+    
+    if materia_profesor not in materias:
+        materias.append(materia_profesor)
+        print("La materia fue agregada al sistema con éxito!")
+    else:
+        print("La materia ya se encuentra en el sistema")
+        
     # Guardar cambios en JSON
     if guardar_profesores(dic):
         print("\n¡Profesor modificado con éxito!")
