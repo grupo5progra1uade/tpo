@@ -19,12 +19,12 @@
         "email": "luis@gmail.com",
         "contraseña": "Contra123",
         "materia": "Literatura"
-    },    
+    },
     "5": {
         "nombre": "Roberto",
         "apellido": "Lopez",
         "email": "roberto@gmail.com",
-        "contraseña": "Hola1234.",
+        "contraseña": "Contra123",
         "materia": "Química"
     },
     "7": {
@@ -34,11 +34,11 @@
         "contraseña": "Contra123",
         "materia": "Calculo"
     },
-    "8": {
-        "nombre": "J",
-        "apellido": "M",
-        "email": "jm@gmail.com",
+    "9": {
+        "nombre": "Clemente",
+        "apellido": "Lopez",
+        "email": "clopez@gmail.com",
         "contraseña": "Contra123",
-        "materia": "Algebra"
+        "materia": "Arquitectura Avanzada"
     }
 }

@@ -114,56 +114,6 @@ def cargar_datos():
     if alumnos_agregados > 0:
         guardar_alumnos_json(alumnos)
         print(f"\nSe agregaron {alumnos_agregados} alumnos exitosamente.")
-    try:
-        cantidad = int(input("¿Cuántos alumnos desea cargar?: "))
-        if cantidad <= 0:
-            print("La cantidad debe ser un número positivo.")
-            return
-    except ValueError:
-        print("Entrada inválida. Debe ser un número entero.")
-        return
-
-    alumnos = cargar_alumnos_json()
-    alumnos_agregados = 0
-    
-    for fila in range(cantidad):
-        # Obtener siguiente legajo disponible
-        legajo = obtener_siguiente_legajo()
-        
-        while True:
-            apellido = input(f"Ingrese apellido del alumno {fila + 1}: ").strip()
-            if not apellido:
-                print("El apellido no puede estar vacío, vuelva a ingresarlo.")
-            elif letras_validas(apellido):
-                apellido = capitalizar(apellido)
-                break
-            else:
-                print("Ingreso mal un apellido, vuelva a ingresarlo.")
-
-        while True:
-            nombre = input(f"Ingrese nombre del alumno {fila + 1}: ").strip()
-            if not nombre:
-                print("El nombre no puede estar vacío, vuelva a ingresarlo.")
-            elif letras_validas(nombre):
-                nombre = capitalizar(nombre)
-                break
-            else:
-                print("Ingreso mal un nombre, vuelva a ingresarlo.")
-
-        legajo_str = str(legajo)
-        alumnos[legajo_str] = {
-            "apellido": apellido,
-            "nombre": nombre
-        }
-        alumnos_agregados += 1
-        print(f"Alumno {nombre} {apellido} agregado con legajo {legajo}")
-
-        legajo += 1  # incrementar legajo para el siguiente alumno
-
-    # Guardar automáticamente en JSON después de cargar
-    if alumnos_agregados > 0:
-        guardar_alumnos_json(alumnos)
-        print(f"\nSe agregaron {alumnos_agregados} alumnos exitosamente.")
 
 def imprimir_matriz():
     alumnos = cargar_alumnos_json()

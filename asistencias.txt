@@ -189,3 +189,21 @@
 2025-07-01,Matematica,1012,Carlos Ball,Ausente
 2025-07-01,Matematica,1014,Carlos Jones,Ausente
 
+2025-07-02,Arquitectura Avanzada,1001,Ana López,Presente
+2025-07-02,Arquitectura Avanzada,1002,Bruno Martínez,Presente
+2025-07-02,Arquitectura Avanzada,1003,Clara Ramírez,Presente
+2025-07-02,Arquitectura Avanzada,1004,Diego Suárez,Presente
+2025-07-02,Arquitectura Avanzada,1005,Elena Fernández,Presente
+2025-07-02,Arquitectura Avanzada,1006,Francisco Gómez,Presente
+2025-07-02,Arquitectura Avanzada,1007,Gabriela Pérez,Presente
+2025-07-02,Arquitectura Avanzada,1008,Hugo Sánchez,Presente
+2025-07-02,Arquitectura Avanzada,1009,Isabel Torres,Presente
+2025-07-02,Arquitectura Avanzada,1010,Julián Vega,Ausente
+2025-07-02,Arquitectura Avanzada,1011,Juan Fernando Quintero,Media falta
+2025-07-02,Arquitectura Avanzada,1012,Carlos Ball,Media falta
+2025-07-02,Arquitectura Avanzada,1014,Carlos Jones,Ausente
+2025-07-02,Arquitectura Avanzada,1015,Carlos Sainz,Ausente
+2025-07-02,Arquitectura Avanzada,1016,A J,Ausente
+2025-07-02,Arquitectura Avanzada,1017,A M,Media falta
+2025-07-02,Arquitectura Avanzada,1018,S S,Presente
+
